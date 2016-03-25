@@ -11,3 +11,17 @@ document.onkeydown = function(e) {
 		Tetris.pressDown();
 	}
 }
+
+var image = EPG.createImg(11, 0, 0);
+var mytimer = setInterval(function() {
+	var pos = EPG.relativeOffset(image);
+	if (pos.top < 200) {
+		EPG.moveImg(image, pos.left, pos.top + 10);
+	} else {
+		cleanMytimer();
+	}
+}, 500);
+
+function clearMytimer() {
+	clearInterval(mytimer);
+}

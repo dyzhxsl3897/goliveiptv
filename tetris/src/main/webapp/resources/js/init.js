@@ -18,7 +18,7 @@ var mytimer = setInterval(function() {
 	if (pos.top < 200) {
 		EPG.moveImg(image, pos.left, pos.top + 10);
 	} else {
-		cleanMytimer();
+		clearMytimer();
 	}
 }, 500);
 

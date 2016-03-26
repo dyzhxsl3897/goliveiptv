@@ -1,3 +1,3 @@
-rmdir test
 mkdir test
 put -rp "${HOME}/clone/" /home/lucas/test
+put -rp "${HOME}/clone/tetris/target/ROOT.war" /home/lucas

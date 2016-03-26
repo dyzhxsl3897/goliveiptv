@@ -55,4 +55,4 @@ var PLAYBOARD_V = 17;// 游戏版垂直格子数目
 /**
  * 速度设定
  */
-var SPEED_LVL_1 = 1;
+var SPEED_LVL_1 = 2;

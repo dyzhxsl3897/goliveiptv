@@ -5,7 +5,7 @@
 <meta http-equiv="Expires" CONTENT="0">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">
-<title>EPG Test page</title>
+<title>俄罗斯方块</title>
 <script src="/resources/js/const.js"></script>
 </head>
 <body background="/resources/images/Background.png">

@@ -31,9 +31,9 @@ var EPG = {
 
 	createImg : function(imageNo, posX, posY) {
 		var image = document.createElement("img");
-		image.id = imageNo + "_img";
+		image.id = imageNo + "";
 		image.src = "/resources/images/bricks/" + imageNo + ".png";
-		image.style.position = "relative";
+		image.style.position = "absolute";
 		image.style.left = posX + "px";
 		image.style.top = posY + "px";
 		EPG.getElement("playboard").appendChild(image);
@@ -43,5 +43,12 @@ var EPG = {
 	moveImg : function(image, posX, posY) {
 		image.style.left = posX;
 		image.style.top = posY;
+	},
+
+	moveItem : function(item, top, left) {
+		for (var i = 0; i < item.length; i++) {
+			item[i].style.top = parseInt(item[i].style.top.substring(0, item[i].style.top.length - 2)) + top + "px";
+			item[i].style.left = parseInt(item[i].style.left.substring(0, item[i].style.left.length - 2)) + left + "px";
+		}
 	}
 };

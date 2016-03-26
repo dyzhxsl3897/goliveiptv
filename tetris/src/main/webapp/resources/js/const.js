@@ -41,6 +41,18 @@ var KEY_YELLOW = 0x0115; // 黄色键
 var KEY_BLUE = 0x0116; // 蓝色键
 
 /**
+ * 游戏版，方格，大小设定
+ */
+var CELL_W = 30;// 游戏版一个方格宽度
+var CELL_H = 30;// 游戏版一个方格高度
+
+/**
+ * 游戏版格子数目
+ */
+var PLAYBOARD_H = 10;// 游戏版水平格子数目
+var PLAYBOARD_V = 17;// 游戏版垂直格子数目
+
+/**
  * 速度设定
  */
-var SPEED_LVL_1 = 10;
+var SPEED_LVL_1 = 1;

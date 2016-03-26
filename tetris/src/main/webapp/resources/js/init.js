@@ -12,16 +12,36 @@ document.onkeydown = function(e) {
 	}
 }
 
-var image = EPG.createImg(11, 0, 0);
+var image1 = EPG.createImg(11, 0, CELL_H * 0);
+var image2 = EPG.createImg(11, 0, CELL_H * 1);
+var image3 = EPG.createImg(11, CELL_W * 1, CELL_H * 1);
+var image4 = EPG.createImg(11, CELL_W * 1, CELL_H * 2);
+var item = [];
+item.push(image1);
+item.push(image2);
+item.push(image3);
+item.push(image4);
+
+var i = 0;
 var mytimer = setInterval(function() {
-	var pos = EPG.relativeOffset(image);
-	if (pos.top < 200) {
-		EPG.moveImg(image, pos.left, pos.top + 10);
+	if (i < PLAYBOARD_V - 3) {
+		EPG.moveItem(item, CELL_H, 0);
+		i++;
 	} else {
-		clearMytimer();
+		clearMytimer(item);
 	}
 }, 500);
 
-function clearMytimer() {
+function clearMytimer(item) {
 	clearInterval(mytimer);
+	console.log(item);
+	var image1 = EPG.createImg(11, 0, CELL_H * 0);
+	var image2 = EPG.createImg(11, 0, CELL_H * 1);
+	var image3 = EPG.createImg(11, CELL_W * 1, CELL_H * 1);
+	var image4 = EPG.createImg(11, CELL_W * 1, CELL_H * 2);
+	var item = [];
+	item.push(image1);
+	item.push(image2);
+	item.push(image3);
+	item.push(image4);
 }

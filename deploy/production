@@ -1,3 +1,1 @@
-mkdir test
-put -rp "${HOME}/clone/" /home/lucas/test
-put -rp "${HOME}/clone/tetris/target/ROOT.war" /home/lucas
+put -rp "${HOME}/clone/tetris/target/ROOT.war" ${SERVER_HOME}/deploy

@@ -46,8 +46,8 @@ var EPG = {
 	},
 
 	createItem : function(itemNo) {
-		var type = parseInt(parseInt(itemNo) / 10 - 1);
-		var direct = parseInt(parseInt(itemNo) % 10 - 1);
+		var type = parseInt(parseInt(itemNo, 10) / 10 - 1, 10);
+		var direct = parseInt(parseInt(itemNo, 10) % 10 - 1, 10);
 		var item = {
 			bricks : []
 		};
@@ -66,8 +66,8 @@ var EPG = {
 	moveItem : function(item, top, left) {
 		if (EPG.canMoveItem(item, top, left)) {
 			for (var i = 0; i < item.bricks.length; i++) {
-				var posX = parseInt(item.bricks[i].style.top.substring(0, item.bricks[i].style.top.indexOf("px")));
-				var posY = parseInt(item.bricks[i].style.left.substring(0, item.bricks[i].style.left.indexOf("px")));
+				var posX = parseInt(item.bricks[i].style.top.substring(0, item.bricks[i].style.top.indexOf("px")), 10);
+				var posY = parseInt(item.bricks[i].style.left.substring(0, item.bricks[i].style.left.indexOf("px")), 10);
 				EPG.moveImg(item.bricks[i], posX + top, posY + left);
 			}
 		}
@@ -75,8 +75,8 @@ var EPG = {
 
 	canMoveItem : function(item, top, left) {
 		for (var i = 0; i < item.bricks.length; i++) {
-			var posX = parseInt(item.bricks[i].style.top.substring(0, item.bricks[i].style.top.indexOf("px")));
-			var posY = parseInt(item.bricks[i].style.left.substring(0, item.bricks[i].style.left.indexOf("px")));
+			var posX = parseInt(item.bricks[i].style.top.substring(0, item.bricks[i].style.top.indexOf("px")), 10);
+			var posY = parseInt(item.bricks[i].style.left.substring(0, item.bricks[i].style.left.indexOf("px")), 10);
 			var newPosX = posX + top;
 			var newPosY = posY + left;
 			var x = newPosX / CELL_H;
@@ -94,8 +94,8 @@ var EPG = {
 	setMap : function() {
 		var item = EPG.item;
 		for (var i = 0; i < item.bricks.length; i++) {
-			var posX = parseInt(item.bricks[i].style.top.substring(0, item.bricks[i].style.top.indexOf("px")));
-			var posY = parseInt(item.bricks[i].style.left.substring(0, item.bricks[i].style.left.indexOf("px")));
+			var posX = parseInt(item.bricks[i].style.top.substring(0, item.bricks[i].style.top.indexOf("px")), 10);
+			var posY = parseInt(item.bricks[i].style.left.substring(0, item.bricks[i].style.left.indexOf("px")), 10);
 			var x = posX / CELL_H;
 			var y = posY / CELL_W;
 			EPG.map[x][y] = 1;
@@ -110,8 +110,8 @@ var EPG = {
 		var imagesNeedToRemove = [];
 		for (var i = 0; i < allImages.length; i++) {
 			var image = allImages[i];
-			var posX = parseInt(image.style.top.substring(0, image.style.top.indexOf("px")));
-			var posY = parseInt(image.style.left.substring(0, image.style.left.indexOf("px")));
+			var posX = parseInt(image.style.top.substring(0, image.style.top.indexOf("px")), 10);
+			var posY = parseInt(image.style.left.substring(0, image.style.left.indexOf("px")), 10);
 			var x = posX / CELL_H;
 			var y = posY / CELL_W;
 			if (x == lineNo) {

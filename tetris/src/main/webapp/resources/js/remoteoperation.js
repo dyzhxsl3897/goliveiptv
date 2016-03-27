@@ -10,7 +10,6 @@ var Tetris = {
 		EPG.moveItem(EPG.item, 0, CELL_W);
 	},
 	pressUp : function() {
-		EPG.moveItem(EPG.item, -CELL_H, 0);
 	},
 	pressDown : function() {
 		EPG.moveItem(EPG.item, CELL_H, 0);

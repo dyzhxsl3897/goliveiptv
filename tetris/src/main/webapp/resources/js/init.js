@@ -6,14 +6,16 @@ document.onkeydown = function(e) {
 	} else if (keyCode == KEY_LEFT || keyCode == PC_KEY_LEFT) {
 		Tetris.pressLeft();
 	} else if (keyCode == KEY_UP || keyCode == PC_KEY_UP) {
-		// Tetris.pressUp();
+		Tetris.pressUp();
 	} else if (keyCode == KEY_DOWN || keyCode == PC_KEY_DOWN) {
 		Tetris.pressDown();
 	}
 }
 
+var type = parseInt(Math.random() * ITEM_START.length, 10);
+var direct = parseInt(Math.random() * ITEM_START[type].length, 10);
 EPG.clearPlayboard();
-EPG.item = EPG.createItem(52);
+EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
 
 var mytimer = setInterval(function() {
 	if (EPG.canMoveItem(EPG.item, CELL_H, 0)) {
@@ -21,7 +23,9 @@ var mytimer = setInterval(function() {
 	} else {
 		EPG.setMap();
 		EPG.clearFilledLines();
-		EPG.item = EPG.createItem(21);
+		var type = parseInt(Math.random() * ITEM_START.length, 10);
+		var direct = parseInt(Math.random() * ITEM_START[type].length, 10);
+		EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
 	}
 }, 500);
 

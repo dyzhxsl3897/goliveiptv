@@ -3,16 +3,16 @@
  */
 
 var Tetris = {
-	pressLeft : function(item) {
-		EPG.moveItem(item, 0, -CELL_W);
+	pressLeft : function() {
+		EPG.moveItem(EPG.item, 0, -CELL_W);
 	},
 	pressRight : function() {
-		EPG.moveItem(item, 0, CELL_W);
+		EPG.moveItem(EPG.item, 0, CELL_W);
 	},
 	pressUp : function() {
-		EPG.moveItem(item, -CELL_H, 0);
+		EPG.moveItem(EPG.item, -CELL_H, 0);
 	},
 	pressDown : function() {
-		EPG.moveItem(item, CELL_H, 0);
+		EPG.moveItem(EPG.item, CELL_H, 0);
 	}
 }

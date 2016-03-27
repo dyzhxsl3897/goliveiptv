@@ -2,6 +2,10 @@
  * Main library
  */
 var EPG = {
+	item : {
+		bricks : []
+	},
+
 	getElement : function(id) {
 		return document.getElementById(id);
 	},

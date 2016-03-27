@@ -13,14 +13,15 @@ document.onkeydown = function(e) {
 }
 
 EPG.clearPlayboard();
-EPG.item = EPG.createItem(11);
+EPG.item = EPG.createItem(52);
 
 var mytimer = setInterval(function() {
 	if (EPG.canMoveItem(EPG.item, CELL_H, 0)) {
 		EPG.moveItem(EPG.item, CELL_H, 0);
 	} else {
 		EPG.setMap();
-		EPG.item = EPG.createItem(12);
+		EPG.clearFilledLines();
+		EPG.item = EPG.createItem(21);
 	}
 }, 500);
 

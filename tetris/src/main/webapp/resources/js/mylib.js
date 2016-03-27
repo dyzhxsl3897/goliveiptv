@@ -102,6 +102,45 @@ var EPG = {
 		}
 	},
 
+	clearLine : function(lineNo) {
+		var playboard = EPG.getElement("playboard");
+		var allImages = playboard.childNodes;
+
+		// clear one line
+		var imagesNeedToRemove = [];
+		for (var i = 0; i < allImages.length; i++) {
+			var image = allImages[i];
+			var posX = parseInt(image.style.top.substring(0, image.style.top.indexOf("px")));
+			var posY = parseInt(image.style.left.substring(0, image.style.left.indexOf("px")));
+			var x = posX / CELL_H;
+			var y = posY / CELL_W;
+			if (x == lineNo) {
+				imagesNeedToRemove.push(image);
+				EPG.map[x][y] = 0;
+			}
+		}
+		while (imagesNeedToRemove.length > 0) {
+			var image = imagesNeedToRemove.pop();
+			playboard.removeChild(image);
+		}
+
+		// move all images above this line number down for one cell
+
+	},
+
+	clearFilledLines : function() {
+		for (var i = 0; i < EPG.map.length; i++) {
+			for (var j = 0; j < EPG.map[i].length; j++) {
+				if (EPG.map[i][j] == 0) {
+					break;
+				}
+			}
+			if (j == PLAYBOARD_MAX_W) {
+				EPG.clearLine(i);
+			}
+		}
+	},
+
 	clearPlayboard : function() {
 		var playboard = EPG.getElement("playboard");
 		while (playboard.hasChildNodes()) {

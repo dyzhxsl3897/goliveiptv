@@ -180,20 +180,43 @@ var EPG = {
 			var y = posY / CELL_W;
 			if (x == lineNo) {
 				imagesNeedToRemove.push(image);
-				EPG.map[x][y] = 0;
 			}
 		}
 		while (imagesNeedToRemove.length > 0) {
 			var image = imagesNeedToRemove.pop();
+			var posX = parseInt(image.style.top.substring(0, image.style.top.indexOf("px")), 10);
+			var posY = parseInt(image.style.left.substring(0, image.style.left.indexOf("px")), 10);
+			var x = posX / CELL_H;
+			var y = posY / CELL_W;
+			EPG.map[x][y] = 0;
 			playboard.removeChild(image);
 		}
 
 		// move all images above this line number down for one cell
-
+		allImages = playboard.childNodes;
+		for (var i = lineNo - 1; i >= 0; i--) {
+			for (var j = 0; j < EPG.map[i].length; j++) {
+				if (EPG.map[i][j] == 1) {
+					for (var k = 0; k < allImages.length; k++) {
+						var image = allImages[k];
+						var posX = parseInt(image.style.top.substring(0, image.style.top.indexOf("px")), 10);
+						var posY = parseInt(image.style.left.substring(0, image.style.left.indexOf("px")), 10);
+						var x = posX / CELL_H;
+						var y = posY / CELL_W;
+						if (i == x && j == y) {
+							EPG.moveImg(image, posX + CELL_H, posY);
+							EPG.map[x][y] = 0;
+							EPG.map[x + 1][y] = 1;
+							break;
+						}
+					}
+				}
+			}
+		}
 	},
 
 	clearFilledLines : function() {
-		for (var i = 0; i < EPG.map.length; i++) {
+		for (var i = EPG.map.length - 1; i >= 0; i--) {
 			for (var j = 0; j < EPG.map[i].length; j++) {
 				if (EPG.map[i][j] == 0) {
 					break;
@@ -201,6 +224,7 @@ var EPG = {
 			}
 			if (j == PLAYBOARD_MAX_W) {
 				EPG.clearLine(i);
+				i++;
 			}
 		}
 	},

@@ -16,24 +16,7 @@ var type = parseInt(Math.random() * ITEM_START.length, 10);
 var direct = parseInt(Math.random() * ITEM_START[type].length, 10);
 EPG.clearPlayboard();
 EPG.isPlaying = true;
+EPG.setScore(0);
+EPG.setLevel(0);
 EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
-
-var mytimer = setInterval(function() {
-	if (EPG.canMoveItem(EPG.item, CELL_H, 0)) {
-		EPG.moveItem(EPG.item, CELL_H, 0);
-	} else {
-		EPG.setMap();
-		EPG.clearFilledLines();
-		var type = parseInt(Math.random() * ITEM_START.length, 10);
-		var direct = parseInt(Math.random() * ITEM_START[type].length, 10);
-		EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
-		if (null == EPG.item) {
-			clearMytimer();
-			EPG.isPlaying = false;
-		}
-	}
-}, 500);
-
-function clearMytimer() {
-	clearInterval(mytimer);
-}
+EPG.setTimer(EPG.level);

@@ -10,6 +10,51 @@ var EPG = {
 
 	map : null,
 
+	score : 0,
+
+	timer : null,
+
+	setScore : function(newScore) {
+		EPG.score = newScore;
+		EPG.getElement("score").innerHTML = EPG.score;
+	},
+
+	level : 0,
+
+	setLevel : function(newLevel) {
+		EPG.level = newLevel;
+		EPG.getElement("level").innerHTML = EPG.level + 1;
+	},
+
+	setTimer : function(level) {
+		EPG.clearTimer();
+		EPG.timer = setInterval(function() {
+			EPG.dropDown();
+		}, SPEED_LV[EPG.level]);
+	},
+
+	clearTimer : function() {
+		if (null != EPG.timer) {
+			clearInterval(EPG.timer);
+		}
+	},
+
+	dropDown : function() {
+		if (EPG.canMoveItem(EPG.item, CELL_H, 0)) {
+			EPG.moveItem(EPG.item, CELL_H, 0);
+		} else {
+			EPG.setMap();
+			EPG.clearFilledLines();
+			var type = parseInt(Math.random() * ITEM_START.length, 10);
+			var direct = parseInt(Math.random() * ITEM_START[type].length, 10);
+			EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
+			if (null == EPG.item) {
+				EPG.clearTimer();
+				EPG.isPlaying = false;
+			}
+		}
+	},
+
 	getElement : function(id) {
 		return document.getElementById(id);
 	},
@@ -216,6 +261,7 @@ var EPG = {
 	},
 
 	clearFilledLines : function() {
+		var numberOfLinesRemoved = 0;
 		for (var i = EPG.map.length - 1; i >= 0; i--) {
 			for (var j = 0; j < EPG.map[i].length; j++) {
 				if (EPG.map[i][j] == 0) {
@@ -224,8 +270,14 @@ var EPG = {
 			}
 			if (j == PLAYBOARD_MAX_W) {
 				EPG.clearLine(i);
+				numberOfLinesRemoved++;
 				i++;
 			}
+		}
+		EPG.setScore(EPG.score + (EPG.level + 1) * numberOfLinesRemoved * 10);
+		if (EPG.score > SCORE_LV[EPG.level]) {
+			EPG.setLevel(EPG.level + 1);
+			EPG.setTimer(EPG.level);
 		}
 	},
 

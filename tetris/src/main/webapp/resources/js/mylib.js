@@ -31,24 +31,37 @@ var EPG = {
 
 	createImg : function(imageNo, posX, posY) {
 		var image = document.createElement("img");
-		image.id = imageNo + "";
 		image.src = "/resources/images/bricks/" + imageNo + ".png";
 		image.style.position = "absolute";
-		image.style.left = posX + "px";
-		image.style.top = posY + "px";
+		image.style.top = posX + "px";
+		image.style.left = posY + "px";
 		EPG.getElement("playboard").appendChild(image);
 		return image;
 	},
 
+	createItem : function(itemNo) {
+		var type = parseInt(parseInt(itemNo) / 10 - 1);
+		var direct = parseInt(parseInt(itemNo) % 10 - 1);
+		var item = {
+			bricks : []
+		};
+		for (var i = 0; i < ITEM_START[type][direct].length; i++) {
+			var image = EPG.createImg(itemNo, ITEM_START[type][direct][i][0] * CELL_H, ITEM_START[type][direct][i][1] * CELL_W);
+			item.bricks.push(image);
+		}
+		return item;
+	},
+
 	moveImg : function(image, posX, posY) {
-		image.style.left = posX;
-		image.style.top = posY;
+		image.style.top = posX;
+		image.style.left = posY;
 	},
 
 	moveItem : function(item, top, left) {
-		for (var i = 0; i < item.length; i++) {
-			item[i].style.top = parseInt(item[i].style.top.substring(0, item[i].style.top.length - 2)) + top + "px";
-			item[i].style.left = parseInt(item[i].style.left.substring(0, item[i].style.left.length - 2)) + left + "px";
+		for (var i = 0; i < item.bricks.length; i++) {
+			var posX = parseInt(item.bricks[i].style.top.substring(0, item.bricks[i].style.top.indexOf("px")));
+			var posY = parseInt(item.bricks[i].style.left.substring(0, item.bricks[i].style.left.indexOf("px")));
+			EPG.moveImg(item.bricks[i], posX + top, posY + left);
 		}
 	}
 };

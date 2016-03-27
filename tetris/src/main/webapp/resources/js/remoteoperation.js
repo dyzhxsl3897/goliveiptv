@@ -3,20 +3,16 @@
  */
 
 var Tetris = {
-	pressLeft : function() {
-		var image = EPG.getElement("11_img");
-		image.style.left = parseInt(image.style.left) - 5 + 'px';
+	pressLeft : function(item) {
+		EPG.moveItem(item, 0, -CELL_W);
 	},
 	pressRight : function() {
-		var image = EPG.getElement("11_img");
-		image.style.left = parseInt(image.style.left) + 5 + 'px';
+		EPG.moveItem(item, 0, CELL_W);
 	},
 	pressUp : function() {
-		var image = EPG.getElement("11_img");
-		image.style.top = parseInt(image.style.top) - 5 + 'px';
+		EPG.moveItem(item, -CELL_H, 0);
 	},
 	pressDown : function() {
-		var image = EPG.getElement("11_img");
-		image.style.top = parseInt(image.style.top) + 5 + 'px';
+		EPG.moveItem(item, CELL_H, 0);
 	}
 }

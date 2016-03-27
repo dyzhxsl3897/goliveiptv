@@ -15,6 +15,7 @@ document.onkeydown = function(e) {
 var type = parseInt(Math.random() * ITEM_START.length, 10);
 var direct = parseInt(Math.random() * ITEM_START[type].length, 10);
 EPG.clearPlayboard();
+EPG.isPlaying = true;
 EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
 
 var mytimer = setInterval(function() {
@@ -26,9 +27,13 @@ var mytimer = setInterval(function() {
 		var type = parseInt(Math.random() * ITEM_START.length, 10);
 		var direct = parseInt(Math.random() * ITEM_START[type].length, 10);
 		EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
+		if (null == EPG.item) {
+			clearMytimer();
+			EPG.isPlaying = false;
+		}
 	}
 }, 500);
 
-function clearMytimer(item) {
+function clearMytimer() {
 	clearInterval(mytimer);
 }

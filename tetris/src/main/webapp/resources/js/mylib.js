@@ -2,6 +2,8 @@
  * Main library
  */
 var EPG = {
+	isPlaying : false,
+
 	item : {
 		bricks : []
 	},
@@ -41,7 +43,6 @@ var EPG = {
 		image.style.position = "absolute";
 		image.style.top = posX + "px";
 		image.style.left = posY + "px";
-		EPG.getElement("playboard").appendChild(image);
 		return image;
 	},
 
@@ -49,11 +50,28 @@ var EPG = {
 		var type = parseInt(parseInt(itemNo, 10) / 10 - 1, 10);
 		var direct = parseInt(parseInt(itemNo, 10) % 10 - 1, 10);
 		var item = {
+			type : type,
+			direct : direct,
 			bricks : []
 		};
 		for (var i = 0; i < ITEM_START[type][direct].length; i++) {
+			var newPosX = ITEM_START[type][direct][i][0] * CELL_H;
+			var newPosY = ITEM_START[type][direct][i][1] * CELL_W;
+			var x = newPosX / CELL_H;
+			var y = newPosY / CELL_W;
+
+			if (x < 0 || x > PLAYBOARD_MAX_H - 1 || y < 0 || y > PLAYBOARD_MAX_W - 1) {
+				return null;
+			}
+			if (EPG.map[x][y] == 1) {
+				return null;
+			}
+
 			var image = EPG.createImg(itemNo, ITEM_START[type][direct][i][0] * CELL_H, ITEM_START[type][direct][i][1] * CELL_W);
 			item.bricks.push(image);
+		}
+		for (var i = 0; i < item.bricks.length; i++) {
+			EPG.getElement("playboard").appendChild(item.bricks[i]);
 		}
 		return item;
 	},
@@ -71,6 +89,52 @@ var EPG = {
 				EPG.moveImg(item.bricks[i], posX + top, posY + left);
 			}
 		}
+	},
+
+	transformItem : function() {
+		var playboard = EPG.getElement("playboard");
+		var type = EPG.item.type;
+		var direct = EPG.item.direct;
+		var newItem = {
+			type : type,
+			direct : (direct + 1) % 4,
+			bricks : []
+		};
+
+		var imageNo = (type + 1) * 10 + direct + 1;
+		// do transformation, create new transformed item
+		for (var i = 0; i < EPG.item.bricks.length; i++) {
+			var brick = EPG.item.bricks[i];
+			var posX = parseInt(brick.style.top.substring(0, brick.style.top.indexOf("px")), 10);
+			var posY = parseInt(brick.style.left.substring(0, brick.style.left.indexOf("px")), 10);
+			var newPosX = posX + ITEM_TRANSFORM[type][direct][i][0] * CELL_H;
+			var newPosY = posY + ITEM_TRANSFORM[type][direct][i][1] * CELL_W;
+			var x = newPosX / CELL_H;
+			var y = newPosY / CELL_W;
+
+			// if can't transform, the quit
+			if (x < 0 || x > PLAYBOARD_MAX_H - 1 || y < 0 || y > PLAYBOARD_MAX_W - 1) {
+				return;
+			}
+			if (EPG.map[x][y] == 1) {
+				return;
+			}
+
+			// create one brick
+			var image = EPG.createImg(imageNo, newPosX, newPosY);
+			newItem.bricks.push(image);
+		}
+
+		// remove old form
+		for (var i = 0; i < EPG.item.bricks.length; i++) {
+			playboard.removeChild(EPG.item.bricks[i]);
+		}
+
+		// add new form
+		for (var i = 0; i < EPG.item.bricks.length; i++) {
+			playboard.appendChild(newItem.bricks[i]);
+		}
+		EPG.item = newItem;
 	},
 
 	canMoveItem : function(item, top, left) {

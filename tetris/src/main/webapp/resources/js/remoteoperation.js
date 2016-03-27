@@ -4,14 +4,23 @@
 
 var Tetris = {
 	pressLeft : function() {
-		EPG.moveItem(EPG.item, 0, -CELL_W);
+		if (EPG.isPlaying) {
+			EPG.moveItem(EPG.item, 0, -CELL_W);
+		}
 	},
 	pressRight : function() {
-		EPG.moveItem(EPG.item, 0, CELL_W);
+		if (EPG.isPlaying) {
+			EPG.moveItem(EPG.item, 0, CELL_W);
+		}
 	},
 	pressUp : function() {
+		if (EPG.isPlaying) {
+			EPG.transformItem();
+		}
 	},
 	pressDown : function() {
-		EPG.moveItem(EPG.item, CELL_H, 0);
+		if (EPG.isPlaying) {
+			EPG.moveItem(EPG.item, CELL_H, 0);
+		}
 	}
 }

@@ -9,7 +9,7 @@
 <script src="/resources/js/const.js"></script>
 </head>
 <body background="/resources/images/Background.png">
-	<div id="playboard" style="position: absolute; top: 14px; left: 156; width: 220px; height: 530px;"></div>
+	<div id="playboard" style="position: absolute; top: 14px; left: 156; width: 300px; height: 510px;"></div>
 	<script src="/resources/js/const.js"></script>
 	<script src="/resources/js/mylib.js"></script>
 	<script src="/resources/js/remoteoperation.js"></script>

@@ -6,25 +6,24 @@ document.onkeydown = function(e) {
 	} else if (keyCode == KEY_LEFT || keyCode == PC_KEY_LEFT) {
 		Tetris.pressLeft();
 	} else if (keyCode == KEY_UP || keyCode == PC_KEY_UP) {
-		Tetris.pressUp();
+		// Tetris.pressUp();
 	} else if (keyCode == KEY_DOWN || keyCode == PC_KEY_DOWN) {
 		Tetris.pressDown();
 	}
 }
 
+EPG.clearPlayboard();
 EPG.item = EPG.createItem(11);
 
-var i = 0;
 var mytimer = setInterval(function() {
-	if (i < PLAYBOARD_MAX_H - 3) {
+	if (EPG.canMoveItem(EPG.item, CELL_H, 0)) {
 		EPG.moveItem(EPG.item, CELL_H, 0);
-		i++;
 	} else {
-		clearMytimer(EPG.item);
+		EPG.setMap();
+		EPG.item = EPG.createItem(12);
 	}
 }, 500);
 
 function clearMytimer(item) {
 	clearInterval(mytimer);
-	EPG.item = EPG.createItem(12);
 }

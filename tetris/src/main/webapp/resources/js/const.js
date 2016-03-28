@@ -49,8 +49,8 @@ var CELL_H = 30;// 游戏版一个方格高度
 /**
  * 游戏版格子数目
  */
-var PLAYBOARD_MAX_W = 10;// 游戏版水平格子数目
-var PLAYBOARD_MAX_H = 17;// 游戏版垂直格子数目
+var PLAYBOARD_MAX_W = 9;// 游戏版水平格子数目
+var PLAYBOARD_MAX_H = 15;// 游戏版垂直格子数目
 
 /**
  * 速度设定，表示每多少毫秒下降一格

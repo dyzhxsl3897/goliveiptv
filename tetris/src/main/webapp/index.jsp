@@ -15,7 +15,7 @@
 	<div id="next" style="position: absolute; top: 100px; left: 470px; width: 150px; height: 150px;"></div>
 	<img id="levelImg" src="/resources/images/level.png" style="position: absolute; top: 75px; left: 45px; width: 55px; height: 55px;" />
 	<div id="level" style="position: absolute; top: 85px; left: 55px; width: 35px; height: 35px;"></div>
-	<div id="score" style="position: absolute; top: 225px; left: 40px; width: 70px; height: 20px;"></div>
+	<div id="score" style="position: absolute; top: 225px; left: 30px; width: 100px; height: 20px;"></div>
 	<script src="/resources/js/const.js"></script>
 	<script src="/resources/js/mylib.js"></script>
 	<script src="/resources/js/remoteoperation.js"></script>

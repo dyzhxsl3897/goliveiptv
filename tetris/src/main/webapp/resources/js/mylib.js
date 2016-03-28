@@ -274,7 +274,15 @@ var EPG = {
 				i++;
 			}
 		}
-		EPG.setScore(EPG.score + (EPG.level + 1) * numberOfLinesRemoved * 10);
+		/**
+		 * 分数计算规则：<br>
+		 * 1. 每消去一行加100分<br>
+		 * 2. 如果同时消去两行，则奖励50分，同时消去三行，奖励100分，同时消去四行，奖励150分<br>
+		 * 3. 如果等级高于1，则从第二级开始，每个级别，每行额外翻倍奖励，用第二点原则乘以等级数
+		 */
+		if (numberOfLinesRemoved > 0) {
+			EPG.setScore(EPG.score + (numberOfLinesRemoved * 100 + (numberOfLinesRemoved - 1) * 50) * (EPG.level + 1));
+		}
 		if (EPG.score > SCORE_LV[EPG.level]) {
 			EPG.setLevel(EPG.level + 1);
 			EPG.setTimer(EPG.level);

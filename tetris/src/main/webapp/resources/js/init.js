@@ -18,5 +18,7 @@ EPG.clearPlayboard();
 EPG.isPlaying = true;
 EPG.setScore(0);
 EPG.setLevel(0);
-EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
-EPG.setTimer(EPG.level);
+
+//EPG.item = EPG.createItem(34);
+ EPG.item = EPG.createItem((type + 1) * 10 + direct + 1);
+ EPG.setTimer(EPG.level);

@@ -146,7 +146,7 @@ var EPG = {
 			bricks : []
 		};
 
-		var imageNo = (type + 1) * 10 + direct + 1;
+		var imageNo = (newItem.type + 1) * 10 + newItem.direct + 1;
 		// do transformation, create new transformed item
 		for (var i = 0; i < EPG.item.bricks.length; i++) {
 			var brick = EPG.item.bricks[i];

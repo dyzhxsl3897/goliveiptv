@@ -84,7 +84,7 @@ var EPG = {
 
 	createImg : function(imageNo, posX, posY) {
 		var image = document.createElement("img");
-		image.src = "/resources/images/bricks/" + imageNo + ".png";
+		image.src = EPG.getContextPath() + "/resources/images/bricks/" + imageNo + ".png";
 		image.style.position = "absolute";
 		image.style.top = posX + "px";
 		image.style.left = posY + "px";
@@ -305,5 +305,9 @@ var EPG = {
 				EPG.map[i][j] = 0;
 			}
 		}
+	},
+
+	getContextPath : function() {
+		return window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 	}
 };

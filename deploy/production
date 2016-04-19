@@ -1,1 +1,2 @@
-put -rp "/home/rof/clone/tetris/target/ROOT.war" /home/lucas/deploy
+put -rp "/home/rof/clone/tetris/target/tetris.war" /home/lucas/deploy
+put -rp "/home/rof/clone/lobby/target/ROOT.war" /home/lucas/deploy

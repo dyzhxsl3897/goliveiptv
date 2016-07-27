@@ -1,0 +1,13 @@
+@font-face {
+	font-family: pixelFont;
+	src: url(../font/pixel_font.ttf);
+}
+
+@font-face {
+	font-family: pixelFont1;
+	src: url(../font/pixel_font_1.ttf);
+}
+
+body {
+	margin: 0px;
+}

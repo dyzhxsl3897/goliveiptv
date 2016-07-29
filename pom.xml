@@ -17,6 +17,6 @@
 	<modules>
 		<module>lobby</module>
 		<module>tetris</module>
-    <module>snakes</module>
-  </modules>
+		<module>snakes</module>
+	</modules>
 </project>

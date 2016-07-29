@@ -40,8 +40,24 @@ var KEY_GREEN = 0x0114; // 绿色键
 var KEY_YELLOW = 0x0115; // 黄色键
 var KEY_BLUE = 0x0116; // 蓝色键
 
+/**
+ * 升级设定，表示够多少分可以升下一级
+ */
+var SPEED_LV = [ 200, 100, 80, 60, 40, 20 ];
+
+/**
+ * 每一步步长
+ */
+var STEP = 25;
+
+/**
+ * 游戏场景大小
+ */
 var PLAYBOARD_HEIGHT = 400;
 var PLAYBOARD_WIDTH = 550;
 
+/**
+ * 蛇头蛇身像素大小
+ */
 var SNAKE_PIECE_H = 25;
 var SNAKE_PIECE_W = 25;

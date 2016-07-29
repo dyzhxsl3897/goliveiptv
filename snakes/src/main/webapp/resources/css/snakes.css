@@ -14,7 +14,7 @@ div#main {
 }
 
 div#playboard {
-	background-color: blue;
+	background-color: #fce188;
 	position: absolute;
 	width: 550px;
 	height: 425px;

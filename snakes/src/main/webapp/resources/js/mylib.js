@@ -6,8 +6,40 @@ var EPG = {
 		return document.getElementById(id);
 	},
 
+	isPlaying : false,
+
+	timer : null,
+
+	score : 0,
+
+	setScore : function(newScore) {
+		EPG.score = newScore;
+		// TODO EPG.getElement("score").innerHTML = EPG.score;
+	},
+
+	level : 0,
+
+	setLevel : function(newLevel) {
+		EPG.level = newLevel;
+		// TODO EPG.getElement("level").innerHTML = EPG.level + 1;
+	},
+
+	setTimer : function(level) {
+		EPG.clearTimer();
+		EPG.timer = setInterval(function() {
+			EPG.moveSnake();
+		}, SPEED_LV[EPG.level]);
+	},
+
+	clearTimer : function() {
+		if (null != EPG.timer) {
+			clearInterval(EPG.timer);
+			EPG.timer = null;
+		}
+	},
+
 	snakeHead : {
-		dir : 0,
+		dir : 0,// Right 0, Down: 1, Left: 2, Up: 3
 		snakeHead : null
 	},
 
@@ -43,23 +75,33 @@ var EPG = {
 	},
 
 	moveSnake : function() {
-		// Move head
-		var currHeadX = parseInt(EPG.snakeHead.snakeHead.style.top.substring(0, EPG.snakeHead.snakeHead.style.top.indexOf("px")), 10);
-		var currHeadY = parseInt(EPG.snakeHead.snakeHead.style.left.substring(0, EPG.snakeHead.snakeHead.style.left.indexOf("px")), 10);
-		var incrementalX = ((parseInt(EPG.snakeHead.dir / 2, 10) * 2 - 1) * (-5)) * ((EPG.snakeHead.dir) % 2);
-		var incrementalY = ((parseInt(EPG.snakeHead.dir / 2, 10) * 2 - 1) * (-5)) * ((EPG.snakeHead.dir + 1) % 2);
-		EPG.moveImg(EPG.snakeHead.snakeHead, currHeadX + incrementalX, currHeadY + incrementalY);
-
 		// Move body
-		for (var i = 0; i < EPG.snakeBody.length; i++) {
+		for (var i = EPG.snakeBody.length - 1; i >= 0; i--) {
+			// Move current snake body
 			var currBody = EPG.snakeBody[i].snakeBody;
 			var currDir = EPG.snakeBody[i].dir;
 			var currBodyX = parseInt(currBody.style.top.substring(0, currBody.style.top.indexOf("px")), 10);
 			var currBodyY = parseInt(currBody.style.left.substring(0, currBody.style.left.indexOf("px")), 10);
-			var incrementalX = ((parseInt(currDir / 2, 10) * 2 - 1) * (-5)) * ((currDir) % 2);
-			var incrementalY = ((parseInt(currDir / 2, 10) * 2 - 1) * (-5)) * ((currDir + 1) % 2);
+			var incrementalX = ((parseInt(currDir / 2, 10) * 2 - 1) * (-1 * STEP)) * ((currDir) % 2);
+			var incrementalY = ((parseInt(currDir / 2, 10) * 2 - 1) * (-1 * STEP)) * ((currDir + 1) % 2);
 			EPG.moveImg(currBody, currBodyX + incrementalX, currBodyY + incrementalY);
+
+			// Check if need to change this body's direction
+			if (i > 0) {
+				var lastBodyDir = EPG.snakeBody[i - 1].dir;
+			} else {
+				var lastBodyDir = EPG.snakeHead.dir;
+			}
+			EPG.snakeBody[i].dir = lastBodyDir;
 		}
+
+		// Move head
+		var currHeadX = parseInt(EPG.snakeHead.snakeHead.style.top.substring(0, EPG.snakeHead.snakeHead.style.top.indexOf("px")), 10);
+		var currHeadY = parseInt(EPG.snakeHead.snakeHead.style.left.substring(0, EPG.snakeHead.snakeHead.style.left.indexOf("px")), 10);
+		var incrementalX = ((parseInt(EPG.snakeHead.dir / 2, 10) * 2 - 1) * (-1 * STEP)) * ((EPG.snakeHead.dir) % 2);
+		var incrementalY = ((parseInt(EPG.snakeHead.dir / 2, 10) * 2 - 1) * (-1 * STEP)) * ((EPG.snakeHead.dir + 1) % 2);
+		EPG.moveImg(EPG.snakeHead.snakeHead, currHeadX + incrementalX, currHeadY + incrementalY);
+
 	},
 
 	initSnake : function(headPosX, headPosY) {

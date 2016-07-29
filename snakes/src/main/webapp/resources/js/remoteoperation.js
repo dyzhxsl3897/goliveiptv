@@ -2,28 +2,42 @@
  * Remote key press function
  */
 
-var LobbyControl = {
-	pressUp : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].up;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
-	},
-	pressDown : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].down;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
-	},
+var Snakes = {
 	pressLeft : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].left;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
+		if (EPG.isPlaying) {
+			if (EPG.snakeHead.dir == 1 || EPG.snakeHead.dir == 3) {
+				EPG.snakeHead.dir = 2;
+			}
+		}
 	},
 	pressRight : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].right;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
+		if (EPG.isPlaying) {
+			if (EPG.snakeHead.dir == 1 || EPG.snakeHead.dir == 3) {
+				EPG.snakeHead.dir = 0;
+			}
+		}
+	},
+	pressUp : function() {
+		if (EPG.isPlaying) {
+			if (EPG.snakeHead.dir == 0 || EPG.snakeHead.dir == 2) {
+				EPG.snakeHead.dir = 3;
+			}
+		}
+	},
+	pressDown : function() {
+		if (EPG.isPlaying) {
+			if (EPG.snakeHead.dir == 0 || EPG.snakeHead.dir == 2) {
+				EPG.snakeHead.dir = 1;
+			}
+		}
 	},
 	pressEnter : function() {
-		location.href = HomePageNavigation[EPG.currentCard].link;
+		if (EPG.isPlaying) {// If is playing, then enter means pause
+			if (null != EPG.timer) {
+				EPG.clearTimer();
+			} else {
+				EPG.setTimer(EPG.level);
+			}
+		}
 	}
 }

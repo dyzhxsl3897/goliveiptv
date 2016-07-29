@@ -14,6 +14,8 @@
 <body background="${pageContext.request.contextPath}/resources/images/home.png">
 	<img id="ICON_1" src="${pageContext.request.contextPath}/resources/images/home_icon_tetris.png"
 		style="position: absolute; top: 163px; left: 213px; width: 266px; height: 266px;" />
+	<img id="ICON_5" src="${pageContext.request.contextPath}/resources/images/home_icon_snakes.png"
+		style="position: absolute; top: 163px; left: 490px; width: 128px; height: 120px;" />
 	<div id="Link_1" class="show" style="position: absolute; top: 161px; left: 211px; width: 266px; height: 266px; border-radius: 20px;"></div>
 	<div id="Link_2" class="show" style="position: absolute; top: 161px; left: 20px; width: 181px; height: 76px; border-radius: 10px;" onclick=""></div>
 	<div id="Link_3" class="show" style="position: absolute; top: 251px; left: 20px; width: 181px; height: 76px; border-radius: 10px;" onclick=""></div>

@@ -17,5 +17,6 @@ document.onkeydown = function(e) {
 EPG.isPlaying = true;
 EPG.setScore(0);
 EPG.setLevel(0);
-EPG.initSnake(0, STEP * 6);
+EPG.initSnake(5);
+EPG.drawDiamond();
 EPG.setTimer(EPG.level);

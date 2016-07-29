@@ -8,6 +8,8 @@ var EPG = {
 
 	isPlaying : false,
 
+	needIncrease : false,
+
 	timer : null,
 
 	score : 0,
@@ -45,6 +47,10 @@ var EPG = {
 
 	snakeBody : [],
 
+	stars : [],
+
+	diamonds : [],
+
 	createImg : function(imageName, posX, posY) {
 		var image = document.createElement("img");
 		image.src = EPG.getContextPath() + "/resources/images/snakes/" + imageName + ".png";
@@ -74,9 +80,38 @@ var EPG = {
 		EPG.snakeBody.push(snakeBodyElement);
 	},
 
+	drawStar : function() {
+		var posX = Math.floor(Math.random() * (PLAYBOARD_HEIGHT / STEP)) * STEP;
+		var posY = Math.floor(Math.random() * (PLAYBOARD_WIDTH / STEP)) * STEP;
+		var star = EPG.createImg("star", posX, posY);
+		EPG.getElement("playboard").appendChild(star);
+		EPG.stars.push(star);
+	},
+
+	drawDiamond : function() {
+		var posX = Math.floor(Math.random() * (PLAYBOARD_HEIGHT / STEP)) * STEP;
+		var posY = Math.floor(Math.random() * (PLAYBOARD_WIDTH / STEP)) * STEP;
+		var diamond = EPG.createImg("diamond", posX, posY);
+		EPG.getElement("playboard").appendChild(diamond);
+		EPG.diamonds.push(diamond);
+	},
+
 	moveSnake : function() {
+		// If need increase snake body from last move, then do it here
+		if (EPG.needIncrease) {
+			var tailBody = EPG.snakeBody[EPG.snakeBody.length - 1].snakeBody;
+			var posX = parseInt(tailBody.style.top.substring(0, tailBody.style.top.indexOf("px")), 10);
+			var posY = parseInt(tailBody.style.left.substring(0, tailBody.style.left.indexOf("px")), 10);
+			var dir = EPG.snakeBody[EPG.snakeBody.length - 1].dir;
+			EPG.drawSnakeBody(posX, posY, dir);
+		}
+
 		// Move body
-		for (var i = EPG.snakeBody.length - 1; i >= 0; i--) {
+		var lastBodyNumber = EPG.snakeBody.length - 1;
+		if (EPG.needIncrease) {
+			lastBodyNumber--;
+		}
+		for (var i = lastBodyNumber; i >= 0; i--) {
 			// Move current snake body
 			var currBody = EPG.snakeBody[i].snakeBody;
 			var currDir = EPG.snakeBody[i].dir;
@@ -104,13 +139,45 @@ var EPG = {
 
 		// If snake head hits its body or hit the boarder
 		if (EPG.isOver(currHeadX + incrementalX, currHeadY + incrementalY)) {
-			console.log("Over!!!");
 			EPG.clearTimer();
 			EPG.isPlaying = false;
+			// TODO do something here when game is over
 		}
+
+		// Check if snake is eating something...
+		for (var i = 0; i < EPG.diamonds.length; i++) {
+			var diamond = EPG.diamonds[i];
+			var diamondX = parseInt(diamond.style.top.substring(0, diamond.style.top.indexOf("px")), 10);
+			var diamondY = parseInt(diamond.style.left.substring(0, diamond.style.left.indexOf("px")), 10);
+			if ((currHeadX + incrementalX) == diamondX && (currHeadY + incrementalY) == diamondY) {
+				EPG.eatDiamond(diamond);
+				return;
+			}
+		}
+
+		EPG.needIncrease = false;
+	},
+
+	eatDiamond : function(diamond) {
+		// Remove currently diamond
+		var playboard = EPG.getElement("playboard");
+		playboard.removeChild(diamond);
+		EPG.diamonds.pop();
+
+		// Draw a new diamond randomly
+		EPG.drawDiamond();
+
+		// Increase snake body
+		EPG.needIncrease = true;
 	},
 
 	isOver : function(headPosX, headPosY) {
+		// Check if snake head hit the boarder
+		if (headPosX < 0 || headPosY < 0 || headPosX > PLAYBOARD_HEIGHT || headPosY > PLAYBOARD_WIDTH - STEP) {
+			return true;
+		}
+
+		// Check if snake head hit its body, then game over
 		for (var i = EPG.snakeBody.length - 1; i >= 0; i--) {
 			var currBody = EPG.snakeBody[i].snakeBody;
 			var currBodyX = parseInt(currBody.style.top.substring(0, currBody.style.top.indexOf("px")), 10);
@@ -122,13 +189,11 @@ var EPG = {
 		return false;
 	},
 
-	initSnake : function(headPosX, headPosY) {
-		EPG.drawSnakeHead(headPosX, headPosY);
-		EPG.drawSnakeBody(headPosX, headPosY - SNAKE_PIECE_W, 0);
-		EPG.drawSnakeBody(headPosX, headPosY - SNAKE_PIECE_W * 2, 0);
-		EPG.drawSnakeBody(headPosX, headPosY - SNAKE_PIECE_W * 3, 0);
-		EPG.drawSnakeBody(headPosX, headPosY - SNAKE_PIECE_W * 4, 0);
-		EPG.drawSnakeBody(headPosX, headPosY - SNAKE_PIECE_W * 5, 0);
+	initSnake : function(numOfBodys) {
+		EPG.drawSnakeHead(0, SNAKE_PIECE_W * (numOfBodys + 1));
+		for (var i = 0; i < numOfBodys; i++) {
+			EPG.drawSnakeBody(0, SNAKE_PIECE_W * (numOfBodys - i), 0);
+		}
 	},
 
 	getContextPath : function() {

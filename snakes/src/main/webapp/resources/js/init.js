@@ -17,5 +17,5 @@ document.onkeydown = function(e) {
 EPG.isPlaying = true;
 EPG.setScore(0);
 EPG.setLevel(0);
-EPG.initSnake(PLAYBOARD_HEIGHT / 5 * 2, PLAYBOARD_WIDTH / 5 * 3);
+EPG.initSnake(0, STEP * 6);
 EPG.setTimer(EPG.level);

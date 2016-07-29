@@ -102,6 +102,24 @@ var EPG = {
 		var incrementalY = ((parseInt(EPG.snakeHead.dir / 2, 10) * 2 - 1) * (-1 * STEP)) * ((EPG.snakeHead.dir + 1) % 2);
 		EPG.moveImg(EPG.snakeHead.snakeHead, currHeadX + incrementalX, currHeadY + incrementalY);
 
+		// If snake head hits its body or hit the boarder
+		if (EPG.isOver(currHeadX + incrementalX, currHeadY + incrementalY)) {
+			console.log("Over!!!");
+			EPG.clearTimer();
+			EPG.isPlaying = false;
+		}
+	},
+
+	isOver : function(headPosX, headPosY) {
+		for (var i = EPG.snakeBody.length - 1; i >= 0; i--) {
+			var currBody = EPG.snakeBody[i].snakeBody;
+			var currBodyX = parseInt(currBody.style.top.substring(0, currBody.style.top.indexOf("px")), 10);
+			var currBodyY = parseInt(currBody.style.left.substring(0, currBody.style.left.indexOf("px")), 10);
+			if (headPosX == currBodyX && headPosY == currBodyY) {
+				return true;
+			}
+		}
+		return false;
 	},
 
 	initSnake : function(headPosX, headPosY) {

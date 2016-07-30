@@ -18,5 +18,6 @@
 		<module>lobby</module>
 		<module>tetris</module>
 		<module>snakes</module>
+		<module>tohellwithjohnny</module>
 	</modules>
 </project>

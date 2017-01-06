@@ -19,5 +19,6 @@
 		<module>tetris</module>
 		<module>snakes</module>
 		<module>tohellwithjohnny</module>
+		<module>goldminer</module>
 	</modules>
 </project>

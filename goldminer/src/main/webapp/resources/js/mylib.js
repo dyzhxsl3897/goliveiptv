@@ -8,26 +8,147 @@ var EPG = {
 
 	stoneList : [],
 
-	createImg : function(imageName, percent, top, left) {
+	hookImg : null,
+
+	lineImg : null,
+
+	hookDir : 1,
+
+	hookTurnTimer : null,
+
+	hookCatchTimer : null,
+
+	setHookTurnTimer : function(level) {
+		EPG.clearHookTurnTimer();
+		EPG.hookTurnTimer = setInterval(function() {
+			EPG.turnHook();
+		}, HOOK_TURN_SPEED);
+	},
+
+	clearHookTurnTimer : function() {
+		if (null != EPG.hookTurnTimer) {
+			clearInterval(EPG.hookTurnTimer);
+		}
+	},
+
+	setHookCatchTimer : function(level) {
+		EPG.clearHookCatchTimer();
+		EPG.hookCatchTimer = setInterval(function() {
+			EPG.moveHook();
+		}, HOOK_CATCH_SPEED);
+	},
+
+	clearHookCatchTimer : function() {
+		if (null != EPG.hookCatchTimer) {
+			clearInterval(EPG.hookCatchTimer);
+		}
+	},
+
+	turnHook : function() {
+		if (EPG.getHookDegree() >= 77 || EPG.getHookDegree() <= -77) {
+			EPG.hookDir = 0 - EPG.hookDir;
+		}
+		if (EPG.getHookDegree() == 1) {
+		}
+		EPG.setHookDegree(EPG.getHookDegree() + EPG.hookDir);
+	},
+
+	moveHook : function() {
+		var hookImg = EPG.hookImg;
+		var lineImg = EPG.lineImg;
+		var degree = EPG.getHookDegree();
+		var y = parseInt(hookImg.style["transform-origin"].match(/[-+]?\d+/g)[1], 10);
+		if (EPG.isHookTouchBoundary()) {
+			EPG.clearHookCatchTimer();
+			// EPG.setHookTurnTimer();
+		} else {
+			hookImg.style.top = EPG.getHookTop() + 5;
+			lineImg.style.height = EPG.getLineLength() + 5;
+			y -= 5;
+			hookImg.style["transform-origin"] = "18px " + y + "px 0px";
+		}
+	},
+
+	catchItem : function() {
+		EPG.clearHookTurnTimer();
+		EPG.setHookCatchTimer();
+	},
+
+	isHookTouchBoundary : function() {
+		var hookImg = EPG.hookImg;
+		var degree = EPG.getHookDegree();
+		var bottomLeftTop = EPG.getHookTop() + 21 - (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
+		var bottomLeftLeft = EPG.getHookLeft() - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
+		var bottomRightTop = EPG.getHookTop() + 21 - (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
+		var bottomRightLeft = EPG.getHookLeft() + 36 - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
+		if (bottomLeftTop > 430 || bottomRightTop > 430 || bottomLeftLeft < 0 || bottomRightLeft > 640) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	createImg : function(imageName, percent, top, left, width, height) {
 		var image = document.createElement("img");
 		image.src = EPG.getContextPath() + "/resources/images/" + imageName + ".png";
 		image.style.position = "absolute";
 		image.style.top = top + "px";
 		image.style.left = left + "px";
-		image.style.width = parseInt(image.width * percent, 10);
-		image.style.height = parseInt(image.height * percent, 10);
+		if (percent == null) {
+			image.style.width = width;
+			image.style.height = height;
+		} else {
+			image.style.width = parseInt(image.width * percent, 10);
+			image.style.height = parseInt(image.height * percent, 10);
+		}
 		return image;
 	},
 
 	createHook : function() {
-		var hookImg = EPG.createImg("hook", 1, 0, 305);
+		// Create hook image
+		var hookImg = EPG.createImg("hook", null, 0, 305, 36, 21);
 		hookImg.style.transform = "rotate(0deg)";
-		hookImg.style["transform-origin"] = "100% 100%";
+		hookImg.style["transform-origin"] = "18px -25px 0px";
 		EPG.getElement("hookboard").appendChild(hookImg);
+		EPG.hookImg = hookImg;
+
+		// Create line image
+		var lineImg = EPG.createImg("line", null, -26, 322, 1, 600);
+		lineImg.style.height = 26;
+		lineImg.style.transform = "rotate(0deg)";
+		lineImg.style["transform-origin"] = "0px 0px 0px";
+		EPG.getElement("hookboard").appendChild(lineImg);
+		EPG.lineImg = lineImg;
+	},
+
+	getLineLength : function() {
+		return parseInt(EPG.lineImg.style.height.match(/[-+]?\d+/g), 10);
+	},
+
+	getHookTop : function() {
+		return parseInt(EPG.hookImg.style.top.match(/[-+]?\d+/g), 10);
+	},
+
+	getHookLeft : function() {
+		return parseInt(EPG.hookImg.style.left.match(/[-+]?\d+/g), 10);
+	},
+
+	getHookDegree : function() {
+		return parseInt(EPG.hookImg.style.transform.toString().match(/[-+]?\d+(\.\d+)?/g)[0], 10);
+	},
+
+	setHookDegree : function(degree) {
+		// Set hook image degree
+		var hookImg = EPG.hookImg;
+		hookImg.style.transform = "rotate(" + degree + "deg)";
+
+		// Set line image degree
+		var lineImg = EPG.lineImg;
+		lineImg.style.transform = "rotate(" + degree + "deg)";
 	},
 
 	createGold : function(goldNo, top, left) {
-		var goldImg = EPG.createImg("gold", GOLD_SIZE[goldNo], top, left);
+		var goldImg = EPG.createImg("gold", null, top, left, parseInt(169 * GOLD_SIZE[goldNo], 10), parseInt(135 * GOLD_SIZE[goldNo], 10));
 		var gold = {
 			top : top,
 			left : left,
@@ -54,7 +175,7 @@ var EPG = {
 	},
 
 	createStone : function(stoneNo, top, left) {
-		var stoneImg = EPG.createImg("stone", STONE_SIZE[stoneNo], top, left);
+		var stoneImg = EPG.createImg("stone", null, top, left, parseInt(82 * STONE_SIZE[stoneNo], 10), parseInt(60 * STONE_SIZE[stoneNo], 10));
 		var stone = {
 			top : top,
 			left : left,
@@ -136,12 +257,6 @@ var EPG = {
 	},
 
 	isPointInsideRectangle : function(point, item) {
-		console.log("point.x" + point.x);
-		console.log("parseInt(item.left, 10)" + parseInt(item.left, 10));
-		console.log("parseInt(item.left, 10) + parseInt(item.width, 10)" + parseInt(item.left, 10) + parseInt(item.width, 10));
-		console.log("point.y" + point.y);
-		console.log("parseInt(item.top, 10)" + parseInt(item.top, 10));
-		console.log("parseInt(item.top, 10) + parseInt(item.height, 10)" + parseInt(item.top, 10) + parseInt(item.height, 10));
 		if (point.x >= parseInt(item.left, 10) && point.x <= parseInt(item.left, 10) + parseInt(item.width, 10) && point.y >= parseInt(item.top, 10)
 				&& point.y <= parseInt(item.top, 10) + parseInt(item.height, 10)) {
 			return true;

@@ -2,16 +2,18 @@ document.onkeydown = function(e) {
 	e = e || window.event;
 	var keyCode = e.which || e.keyCode;
 	if (keyCode == KEY_RIGHT || keyCode == PC_KEY_RIGHT) {
-		Tetris.pressRight();
+		goldMiner.pressRight();
 	} else if (keyCode == KEY_LEFT || keyCode == PC_KEY_LEFT) {
-		Tetris.pressLeft();
+		goldMiner.pressLeft();
 	} else if (keyCode == KEY_UP || keyCode == PC_KEY_UP) {
-		Tetris.pressUp();
+		goldMiner.pressUp();
 	} else if (keyCode == KEY_DOWN || keyCode == PC_KEY_DOWN) {
-		Tetris.pressDown();
+		goldMiner.pressDown();
 	}
 }
 
 EPG.isPlaying = true;
 
-EPG.initGame();
+ EPG.initGame();
+//console.log(Math.sin(30 * Math.PI / 180));
+ EPG.setHookTurnTimer();

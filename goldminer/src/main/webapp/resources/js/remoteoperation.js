@@ -17,6 +17,7 @@ var goldMiner = {
 	},
 	pressDown : function() {
 		if (EPG.isPlaying) {
+			EPG.catchItem();
 		}
 	}
 }

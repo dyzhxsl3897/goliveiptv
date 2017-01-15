@@ -43,5 +43,8 @@ var KEY_BLUE = 0x0116; // 蓝色键
 PLAYBOARD_HEIGHT = 380;
 PLAYBOARD_WIDTH = 640;
 
+HOOK_TURN_SPEED = 10;// unit of measurement is million second
+HOOK_CATCH_SPEED = 20;// unit of measurement is million second
+
 GOLD_SIZE = [ 0.15, 0.3, 0.6 ];
 STONE_SIZE = [ 0.5, 1 ];

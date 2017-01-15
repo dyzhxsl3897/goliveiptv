@@ -12,24 +12,28 @@
 <title>Good IPTV Games</title>
 </head>
 <body background="${pageContext.request.contextPath}/resources/images/home.png">
+	<img id="ICON_0" src="${pageContext.request.contextPath}/resources/images/btn_personal_center.png"
+		style="position: absolute; top: 32px; left: 482px; width: 152px; height: 46px;" />
 	<img id="ICON_1" src="${pageContext.request.contextPath}/resources/images/home_icon_tetris.png"
-		style="position: absolute; top: 163px; left: 213px; width: 266px; height: 266px;" />
+		style="position: absolute; top: 135px; left: 44px; width: 306px; height: 245px;" />
 	<img id="ICON_2" src="${pageContext.request.contextPath}/resources/images/home_icon_tohellwithjohnny.png"
-		style="position: absolute; top: 163px; left: 22px; width: 181px; height: 76px;" />
-	<img id="ICON_5" src="${pageContext.request.contextPath}/resources/images/home_icon_snakes.png"
-		style="position: absolute; top: 163px; left: 490px; width: 128px; height: 120px;" />
-	<div id="Link_1" class="show" style="position: absolute; top: 161px; left: 211px; width: 266px; height: 266px; border-radius: 20px;"></div>
-	<div id="Link_2" class="show" style="position: absolute; top: 161px; left: 20px; width: 181px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_3" class="show" style="position: absolute; top: 251px; left: 20px; width: 181px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_4" class="show" style="position: absolute; top: 341px; left: 20px; width: 181px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_5" class="show" style="position: absolute; top: 161px; left: 488px; width: 128px; height: 120px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_6" class="show" style="position: absolute; top: 297px; left: 488px; width: 128px; height: 120px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_7" class="show" style="position: absolute; top: 431px; left: 20px; width: 92px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_8" class="show" style="position: absolute; top: 431px; left: 121px; width: 92px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_9" class="show" style="position: absolute; top: 431px; left: 222px; width: 92px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_10" class="show" style="position: absolute; top: 431px; left: 323px; width: 92px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_11" class="show" style="position: absolute; top: 431px; left: 424px; width: 92px; height: 76px; border-radius: 10px;" onclick=""></div>
-	<div id="Link_12" class="show" style="position: absolute; top: 431px; left: 525px; width: 92px; height: 76px; border-radius: 10px;" onclick=""></div>
+		style="position: absolute; top: 122px; left: 381px; width: 275px; height: 125px;" />
+	<img id="ICON_3" src="${pageContext.request.contextPath}/resources/images/home_icon_snakes.png"
+		style="position: absolute; top: 262px; left: 380px; width: 276px; height: 125px;" />
+	<div id="Link_0" class="show"
+		style="position: absolute; top: 30px; left: 480px; width: 152px; height: 46px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;"></div>
+	<div id="Link_1" class="show"
+		style="position: absolute; top: 133px; left: 42px; width: 306px; height: 245px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;"></div>
+	<div id="Link_2" class="show"
+		style="position: absolute; top: 120px; left: 379px; width: 275px; height: 125px; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-left-radius: 13px; border-bottom-right-radius: 13px;"></div>
+	<div id="Link_3" class="show"
+		style="position: absolute; top: 260px; left: 378px; width: 276px; height: 125px; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-left-radius: 13px; border-bottom-right-radius: 13px;"></div>
+	<div id="Link_4" class="show"
+		style="position: absolute; top: 415px; left: 31px; width: 192px; height: 125px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"></div>
+	<div id="Link_5" class="show"
+		style="position: absolute; top: 415px; left: 239px; width: 192px; height: 125px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"></div>
+	<div id="Link_6" class="show"
+		style="position: absolute; top: 415px; left: 448px; width: 192px; height: 125px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"></div>
 	<script src="${pageContext.request.contextPath}/resources/js/const.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/mylib.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/remoteoperation.js"></script>

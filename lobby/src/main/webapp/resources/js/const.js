@@ -52,33 +52,15 @@ var HomePageNavigation = [//
 	link : "/tohellwithjohnny/tohellwithjohnny.jsp"
 }, {
 	card : 3,
-	link : "/"
+	link : "/snakes/snakes.jsp"
 }, {
 	card : 4,
 	link : "/"
 }, {
 	card : 5,
-	link : "/snakes/snakes.jsp"
+	link : "/"
 }, {
 	card : 6,
-	link : "/"
-}, {
-	card : 7,
-	link : "/"
-}, {
-	card : 8,
-	link : "/"
-}, {
-	card : 9,
-	link : "/"
-}, {
-	card : 10,
-	link : "/"
-}, {
-	card : 11,
-	link : "/"
-}, {
-	card : 12,
 	link : "/"
 } //
 ];
@@ -87,80 +69,44 @@ var HomePageCardMoveMatrix = [// up --> down --> left --> right
 {
 	card : 0,
 	up : 0,
-	down : 0,
+	down : 2,
 	left : 0,
 	right : 0
 }, {
 	card : 1,
-	up : 1,
-	down : 9,
-	left : 2,
-	right : 5
+	up : 0,
+	down : 4,
+	left : 1,
+	right : 2
 }, {
 	card : 2,
-	up : 2,
+	up : 0,
 	down : 3,
-	left : 2,
-	right : 1
+	left : 1,
+	right : 2
 }, {
 	card : 3,
 	up : 2,
-	down : 4,
-	left : 3,
-	right : 1
-}, {
-	card : 4,
-	up : 3,
-	down : 7,
-	left : 4,
-	right : 1
-}, {
-	card : 5,
-	up : 5,
 	down : 6,
 	left : 1,
+	right : 3
+}, {
+	card : 4,
+	up : 1,
+	down : 4,
+	left : 4,
 	right : 5
 }, {
-	card : 6,
-	up : 5,
-	down : 12,
-	left : 1,
+	card : 5,
+	up : 1,
+	down : 5,
+	left : 4,
 	right : 6
 }, {
-	card : 7,
-	up : 4,
-	down : 7,
-	left : 7,
-	right : 8
-}, {
-	card : 8,
-	up : 4,
-	down : 8,
-	left : 7,
-	right : 9
-}, {
-	card : 9,
-	up : 1,
-	down : 9,
-	left : 8,
-	right : 10
-}, {
-	card : 10,
-	up : 1,
-	down : 10,
-	left : 9,
-	right : 11
-}, {
-	card : 11,
-	up : 1,
-	down : 11,
-	left : 10,
-	right : 12
-}, {
-	card : 12,
-	up : 6,
-	down : 12,
-	left : 11,
-	right : 12
+	card : 6,
+	up : 3,
+	down : 6,
+	left : 5,
+	right : 6
 } //
 ];

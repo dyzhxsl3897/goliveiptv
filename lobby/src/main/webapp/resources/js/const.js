@@ -55,7 +55,7 @@ var HomePageNavigation = [//
 	link : "/snakes/snakes.jsp"
 }, {
 	card : 4,
-	link : "/"
+	link : "/goldminer"
 }, {
 	card : 5,
 	link : "/"

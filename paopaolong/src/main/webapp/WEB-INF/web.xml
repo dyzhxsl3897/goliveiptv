@@ -3,9 +3,9 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-	<display-name>Gold Miner</display-name>
+	<display-name>Pao Pao Long</display-name>
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>paopaolong.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

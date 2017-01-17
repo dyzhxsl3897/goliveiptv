@@ -8,15 +8,11 @@ var EPG = {
 
 	stoneList : [],
 
-	coinbag : null,
-
 	hookImg : null,
 
 	lineImg : null,
 
-	hookDegreeDir : 1,
-
-	hookLengthDir : 1,
+	hookDir : 1,
 
 	hookTurnTimer : null,
 
@@ -50,11 +46,11 @@ var EPG = {
 
 	turnHook : function() {
 		if (EPG.getHookDegree() >= 77 || EPG.getHookDegree() <= -77) {
-			EPG.hookDegreeDir = 0 - EPG.hookDegreeDir;
+			EPG.hookDir = 0 - EPG.hookDir;
 		}
 		if (EPG.getHookDegree() == 1) {
 		}
-		EPG.setHookDegree(EPG.getHookDegree() + EPG.hookDegreeDir);
+		EPG.setHookDegree(EPG.getHookDegree() + EPG.hookDir);
 	},
 
 	moveHook : function() {
@@ -173,9 +169,6 @@ var EPG = {
 				return null;
 			}
 		}
-		if (EPG.isNewItemCoverOthers(gold, EPG.coinbag)) {
-			return null;
-		}
 		EPG.getElement("playboard").appendChild(goldImg);
 		EPG.goldList.push(gold);
 		return gold;
@@ -203,42 +196,9 @@ var EPG = {
 				return null;
 			}
 		}
-		if (EPG.isNewItemCoverOthers(stone, EPG.coinbag)) {
-			return null;
-		}
 		EPG.getElement("playboard").appendChild(stoneImg);
 		EPG.stoneList.push(stone);
 		return stone;
-	},
-
-	createCoinbag : function(top, left) {
-		var coinbagImg = EPG.createImg("coinbag", null, top, left, parseInt(50 * 0.75, 10), parseInt(72 * 0.75, 10));
-		var coinbag = {
-			top : top,
-			left : left,
-			width : coinbagImg.style.width,
-			height : coinbagImg.style.height,
-			img : coinbagImg
-		};
-		if (EPG.isOutSideOfPlayBoard(coinbag)) {
-			return null;
-		}
-		for (var i = 0; i < EPG.goldList.length; i++) {
-			if (EPG.isNewItemCoverOthers(coinbag, EPG.goldList[i])) {
-				return null;
-			}
-		}
-		for (var i = 0; i < EPG.stoneList.length; i++) {
-			if (EPG.isNewItemCoverOthers(coinbag, EPG.stoneList[i])) {
-				return null;
-			}
-		}
-		if (EPG.isNewItemCoverOthers(coinbag, EPG.coinbag)) {
-			return null;
-		}
-		EPG.getElement("playboard").appendChild(coinbagImg);
-		EPG.coinbag = coinbag;
-		return coinbag;
 	},
 
 	isOutSideOfPlayBoard : function(item) {
@@ -250,9 +210,6 @@ var EPG = {
 	},
 
 	isNewItemCoverOthers : function(item1, item2) {
-		if (null == item2) {
-			return false;
-		}
 		var points = [];
 		points[0] = {
 			x : parseInt(item1.left, 10),
@@ -309,15 +266,6 @@ var EPG = {
 
 	initGame : function() {
 		EPG.createHook();
-		counter = 0;
-		while (counter < 1) {
-			var top = parseInt(Math.random() * PLAYBOARD_HEIGHT, 10);
-			var left = parseInt(Math.random() * PLAYBOARD_WIDTH, 10);
-			var coinbag = EPG.createCoinbag(top, left);
-			if (coinbag != null) {
-				counter++;
-			}
-		}
 		var counter = 0;
 		while (counter < 5) {
 			var top = parseInt(Math.random() * PLAYBOARD_HEIGHT, 10);

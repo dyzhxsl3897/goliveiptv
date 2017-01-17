@@ -8,10 +8,10 @@
 	</parent>
 
 	<groupId>com.zhongdan.games.puzzle</groupId>
-	<artifactId>goldminer</artifactId>
+	<artifactId>paopaolong</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>goldminer Maven Webapp</name>
+	<name>paopaolong Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
@@ -23,6 +23,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>goldminer</finalName>
+		<finalName>paopaolong</finalName>
 	</build>
 </project>

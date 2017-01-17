@@ -62,20 +62,31 @@ var EPG = {
 		var lineImg = EPG.lineImg;
 		var degree = EPG.getHookDegree();
 		var y = parseInt(hookImg.style["transform-origin"].match(/[-+]?\d+/g)[1], 10);
-		if (EPG.isHookTouchBoundary()) {
+		if (EPG.isHookBack()) {
+			EPG.hookLengthDir = 1;
 			EPG.clearHookCatchTimer();
-			// EPG.setHookTurnTimer();
-		} else {
-			hookImg.style.top = EPG.getHookTop() + 5;
-			lineImg.style.height = EPG.getLineLength() + 5;
-			y -= 5;
-			hookImg.style["transform-origin"] = "18px " + y + "px 0px";
+			EPG.setHookTurnTimer();
+			return;
+		} else if (EPG.isHookTouchBoundary()) {
+			EPG.hookLengthDir = -1;
 		}
+		hookImg.style.top = EPG.getHookTop() + 5 * EPG.hookLengthDir;
+		lineImg.style.height = EPG.getLineLength() + 5 * EPG.hookLengthDir;
+		y -= 5 * EPG.hookLengthDir;
+		hookImg.style["transform-origin"] = "18px " + y + "px 0px";
 	},
 
 	catchItem : function() {
 		EPG.clearHookTurnTimer();
 		EPG.setHookCatchTimer();
+	},
+
+	isHookBack : function() {
+		if (EPG.getHookTop() == 0 && EPG.hookLengthDir == -1) {
+			return true;
+		} else {
+			return false;
+		}
 	},
 
 	isHookTouchBoundary : function() {

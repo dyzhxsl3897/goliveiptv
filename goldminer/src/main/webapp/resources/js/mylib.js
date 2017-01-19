@@ -92,15 +92,33 @@ var EPG = {
 	isHookTouchBoundary : function() {
 		var hookImg = EPG.hookImg;
 		var degree = EPG.getHookDegree();
-		var bottomLeftTop = EPG.getHookTop() + 21 - (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
+		var bottomLeftTop = (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
 		var bottomLeftLeft = EPG.getHookLeft() - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
-		var bottomRightTop = EPG.getHookTop() + 21 - (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
+		var bottomRightTop = (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
 		var bottomRightLeft = EPG.getHookLeft() + 36 - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
 		if (bottomLeftTop > 430 || bottomRightTop > 430 || bottomLeftLeft < 0 || bottomRightLeft > 640) {
 			return true;
 		} else {
 			return false;
 		}
+	},
+
+	isHookTouchItem : function() {
+		var touchStatus = {
+			isTouched : false,
+			item : null
+		};
+		var hookImg = EPG.hookImg;
+		var degree = EPG.getHookDegree();
+		var bottomLeftTop = (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
+		var bottomLeftLeft = EPG.getHookLeft() - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
+		var bottomRightTop = (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
+		var bottomRightLeft = EPG.getHookLeft() + 36 - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
+
+		for (var i = 0; i < EPG.goldList.length; i++) {
+		}
+
+		return touchStatus;
 	},
 
 	createImg : function(imageName, percent, top, left, width, height) {
@@ -122,6 +140,7 @@ var EPG = {
 	createHook : function() {
 		// Create hook image
 		var hookImg = EPG.createImg("hook", null, 0, 305, 36, 21);
+		hookImg.style["z-index"] = 90;
 		hookImg.style.transform = "rotate(0deg)";
 		hookImg.style["transform-origin"] = "18px -25px 0px";
 		EPG.getElement("hookboard").appendChild(hookImg);
@@ -129,6 +148,7 @@ var EPG = {
 
 		// Create line image
 		var lineImg = EPG.createImg("line", null, -26, 322, 1, 600);
+		lineImg.style["z-index"] = 90;
 		lineImg.style.height = 26;
 		lineImg.style.transform = "rotate(0deg)";
 		lineImg.style["transform-origin"] = "0px 0px 0px";

@@ -9,5 +9,9 @@ document.onkeydown = function(e) {
 		paopaolong.pressUp();
 	} else if (keyCode == KEY_DOWN || keyCode == PC_KEY_DOWN) {
 		paopaolong.pressDown();
+	} else if (keyCode == KEY_ENTER || keyCode == PC_KEY_ENTER) {
+		paopaolong.pressEnter();
 	}
 }
+
+EPG.initGame();

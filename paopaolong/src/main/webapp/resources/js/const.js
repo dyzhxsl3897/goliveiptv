@@ -13,6 +13,7 @@ var KEY_LEFT = 0x0025; // 左
 var KEY_UP = 0x0026; // 上
 var KEY_RIGHT = 0x0027; // 右
 var KEY_DOWN = 0x0028; // 下
+var PC_KEY_ENTER = 13; // pc回车
 var PC_KEY_LEFT = 37; // pc左
 var PC_KEY_UP = 38; // pc上
 var PC_KEY_RIGHT = 39; // pc右
@@ -39,3 +40,8 @@ var KEY_RED = 0x0113; // 红色键
 var KEY_GREEN = 0x0114; // 绿色键
 var KEY_YELLOW = 0x0115; // 黄色键
 var KEY_BLUE = 0x0116; // 蓝色键
+
+ARROW_TURN_SPEED = 10;// unit of measurement is million second
+BALL_MOVE_SPEED = 10;// unit of measurement is million second
+
+BALL_COLOR = [ "blue", "purple", "red", "yellow" ];

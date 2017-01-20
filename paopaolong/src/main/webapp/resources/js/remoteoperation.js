@@ -5,10 +5,12 @@
 var paopaolong = {
 	pressLeft : function() {
 		if (EPG.isPlaying) {
+			EPG.arrowTurnLeft();
 		}
 	},
 	pressRight : function() {
 		if (EPG.isPlaying) {
+			EPG.arrowTurnRight();
 		}
 	},
 	pressUp : function() {
@@ -17,6 +19,11 @@ var paopaolong = {
 	},
 	pressDown : function() {
 		if (EPG.isPlaying) {
+		}
+	},
+	pressEnter : function() {
+		if (EPG.isPlaying && !EPG.isBallMoving) {
+			EPG.fireBall();
 		}
 	}
 }

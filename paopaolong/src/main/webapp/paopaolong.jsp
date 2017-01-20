@@ -12,8 +12,8 @@
 <title>泡泡龙</title>
 </head>
 <body background="${pageContext.request.contextPath}/resources/images/Background.png">
-	<div id="hookboard" style="position: absolute; top: 100px; left: 0px; width: 640px; height: 430px;"></div>
-	<div id="playboard" style="position: absolute; top: 150px; left: 0px; width: 640px; height: 380px;"></div>
+	<div id="playboard" style="position: absolute; top: 80px; left: 7px; width: 506px; height: 450px;"></div>
+	<img id="arrowImg" src="${pageContext.request.contextPath}/resources/images/arrow.png" style="position: absolute; top: 410px; left: 190px;" />
 	<script src="${pageContext.request.contextPath}/resources/js/const.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/mylib.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/remoteoperation.js"></script>

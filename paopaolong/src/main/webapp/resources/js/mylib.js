@@ -4,88 +4,130 @@
 var EPG = {
 	isPlaying : true,
 
-	goldList : [],
+	waitingBall : null,// The ball under the arrow, waiting to be shoot
 
-	stoneList : [],
+	nextBall : null,// The small ball for next
 
-	hookImg : null,
+	movingBall : null,// The ball is moving
 
-	lineImg : null,
+	isBallMoving : false,
 
-	hookDir : 1,
+	ballMovingBasePoint : null,
 
-	hookTurnTimer : null,
+	ballDegree : 0,
 
-	hookCatchTimer : null,
+	ballMovementTimer : null,
 
-	setHookTurnTimer : function(level) {
-		EPG.clearHookTurnTimer();
-		EPG.hookTurnTimer = setInterval(function() {
-			EPG.turnHook();
-		}, HOOK_TURN_SPEED);
+	setBallMovementTimer : function(level) {
+		EPG.ballMovementTimer = setInterval(function() {
+			EPG.moveBall();
+		}, BALL_MOVE_SPEED);
 	},
 
-	clearHookTurnTimer : function() {
-		if (null != EPG.hookTurnTimer) {
-			clearInterval(EPG.hookTurnTimer);
+	clearBallMovementTimer : function() {
+		if (null != EPG.ballMovementTimer) {
+			clearInterval(EPG.ballMovementTimer);
 		}
+
+		// Set ball moving to false
+		EPG.isBallMoving = false;
 	},
 
-	setHookCatchTimer : function(level) {
-		EPG.clearHookCatchTimer();
-		EPG.hookCatchTimer = setInterval(function() {
-			EPG.moveHook();
-		}, HOOK_CATCH_SPEED);
+	fireBall : function() {
+		// Set initial parameters
+		EPG.isBallMoving = true;
+		EPG.ballDegree = EPG.getArrowDegree();
+		EPG.ballMovingBasePoint = {
+			top : 366,
+			left : 180,
+			steps : 0
+		};
+
+		// Set movingBall for the ball movement
+		EPG.movingBall = EPG.waitingBall;
+
+		// Set nextBall as waitingBall
+		EPG.waitingBall = EPG.nextBall;
+		EPG.waitingBall.style.top = "366px";
+		EPG.waitingBall.style.left = "180px";
+		EPG.waitingBall.style.width = "38px";
+		EPG.waitingBall.style.height = "38px";
+
+		// Create new nextBall
+		EPG.createNextBall();
+
+		// Fire the ball
+		EPG.setBallMovementTimer();
 	},
 
-	clearHookCatchTimer : function() {
-		if (null != EPG.hookCatchTimer) {
-			clearInterval(EPG.hookCatchTimer);
-		}
-	},
+	moveBall : function() {
+		if (EPG.isBallTouchLeftBoundary()) {
+			EPG.ballMovingBasePoint = {
+				top : EPG.getMovingBallTop(),
+				left : EPG.getMovingBallLeft(),
+				steps : 0
+			};
+			EPG.ballDegree = -1 * EPG.ballDegree;
 
-	turnHook : function() {
-		if (EPG.getHookDegree() >= 77 || EPG.getHookDegree() <= -77) {
-			EPG.hookDir = 0 - EPG.hookDir;
-		}
-		if (EPG.getHookDegree() == 1) {
-		}
-		EPG.setHookDegree(EPG.getHookDegree() + EPG.hookDir);
-	},
+			EPG.ballMovingBasePoint.steps++;
+			EPG.movingBall.style.top = parseInt(EPG.ballMovingBasePoint.top - EPG.ballMovingBasePoint.steps * 5
+					* Math.cos(EPG.ballDegree * Math.PI / 180), 10);
+			EPG.movingBall.style.left = parseInt(EPG.ballMovingBasePoint.left + EPG.ballMovingBasePoint.steps * 5
+					* Math.sin(EPG.ballDegree * Math.PI / 180), 10);
+		} else if (EPG.isBallTouchRightBoundary()) {
+			EPG.ballMovingBasePoint = {
+				top : EPG.getMovingBallTop(),
+				left : EPG.getMovingBallLeft(),
+				steps : 0
+			};
+			EPG.ballDegree = -1 * EPG.ballDegree;
 
-	moveHook : function() {
-		var hookImg = EPG.hookImg;
-		var lineImg = EPG.lineImg;
-		var degree = EPG.getHookDegree();
-		var y = parseInt(hookImg.style["transform-origin"].match(/[-+]?\d+/g)[1], 10);
-		if (EPG.isHookTouchBoundary()) {
-			EPG.clearHookCatchTimer();
-			// EPG.setHookTurnTimer();
+			EPG.ballMovingBasePoint.steps++;
+			EPG.movingBall.style.top = parseInt(EPG.ballMovingBasePoint.top - EPG.ballMovingBasePoint.steps * 5
+					* Math.cos(EPG.ballDegree * Math.PI / 180), 10);
+			EPG.movingBall.style.left = parseInt(EPG.ballMovingBasePoint.left + EPG.ballMovingBasePoint.steps * 5
+					* Math.sin(EPG.ballDegree * Math.PI / 180), 10);
+		} else if (EPG.isBallTouchTopBoundary()) {
+			EPG.clearBallMovementTimer();
 		} else {
-			hookImg.style.top = EPG.getHookTop() + 5;
-			lineImg.style.height = EPG.getLineLength() + 5;
-			y -= 5;
-			hookImg.style["transform-origin"] = "18px " + y + "px 0px";
+			EPG.ballMovingBasePoint.steps++;
+			EPG.movingBall.style.top = parseInt(EPG.ballMovingBasePoint.top - EPG.ballMovingBasePoint.steps * 5
+					* Math.cos(EPG.ballDegree * Math.PI / 180), 10);
+			EPG.movingBall.style.left = parseInt(EPG.ballMovingBasePoint.left + EPG.ballMovingBasePoint.steps * 5
+					* Math.sin(EPG.ballDegree * Math.PI / 180), 10);
 		}
 	},
 
-	catchItem : function() {
-		EPG.clearHookTurnTimer();
-		EPG.setHookCatchTimer();
-	},
-
-	isHookTouchBoundary : function() {
-		var hookImg = EPG.hookImg;
-		var degree = EPG.getHookDegree();
-		var bottomLeftTop = EPG.getHookTop() + 21 - (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
-		var bottomLeftLeft = EPG.getHookLeft() - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
-		var bottomRightTop = EPG.getHookTop() + 21 - (EPG.getHookTop() + 25) * Math.cos(degree * Math.PI / 180);
-		var bottomRightLeft = EPG.getHookLeft() + 36 - (EPG.getHookTop() + 25) * Math.sin(degree * Math.PI / 180);
-		if (bottomLeftTop > 430 || bottomRightTop > 430 || bottomLeftLeft < 0 || bottomRightLeft > 640) {
+	isBallTouchLeftBoundary : function() {
+		if (EPG.getMovingBallLeft() <= 0) {
 			return true;
 		} else {
 			return false;
 		}
+	},
+
+	isBallTouchRightBoundary : function() {
+		if (EPG.getMovingBallLeft() >= 468) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	isBallTouchTopBoundary : function() {
+		if (EPG.getMovingBallTop() <= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	getMovingBallTop : function() {
+		return parseInt(EPG.movingBall.style.top.match(/[-+]?\d+/g), 10);
+	},
+
+	getMovingBallLeft : function() {
+		return parseInt(EPG.movingBall.style.left.match(/[-+]?\d+/g), 10);
 	},
 
 	createImg : function(imageName, percent, top, left, width, height) {
@@ -104,213 +146,82 @@ var EPG = {
 		return image;
 	},
 
-	createHook : function() {
-		// Create hook image
-		var hookImg = EPG.createImg("hook", null, 0, 305, 36, 21);
-		hookImg.style.transform = "rotate(0deg)";
-		hookImg.style["transform-origin"] = "18px -25px 0px";
-		EPG.getElement("hookboard").appendChild(hookImg);
-		EPG.hookImg = hookImg;
-
-		// Create line image
-		var lineImg = EPG.createImg("line", null, -26, 322, 1, 600);
-		lineImg.style.height = 26;
-		lineImg.style.transform = "rotate(0deg)";
-		lineImg.style["transform-origin"] = "0px 0px 0px";
-		EPG.getElement("hookboard").appendChild(lineImg);
-		EPG.lineImg = lineImg;
+	createBall : function(color, top, left) {
+		var newBallImg = EPG.createImg(color + "Ball", null, top, left, 38, 38);
+		var waitingBall = EPG.getElement("playboard").appendChild(newBallImg);
+		EPG.waitingBall = waitingBall;
 	},
 
-	getLineLength : function() {
-		return parseInt(EPG.lineImg.style.height.match(/[-+]?\d+/g), 10);
+	createWaitingBall : function(color) {
+		var newBallImg = EPG.createImg(color + "Ball", null, 366, 180, 38, 38);
+		var waitingBall = EPG.getElement("playboard").appendChild(newBallImg);
+		EPG.waitingBall = waitingBall;
 	},
 
-	getHookTop : function() {
-		return parseInt(EPG.hookImg.style.top.match(/[-+]?\d+/g), 10);
+	createNextBall : function() {
+		var color = parseInt(Math.random() * 4, 10);
+		var newBallImg = EPG.createImg(BALL_COLOR[color] + "Ball", null, 409, 185, 26, 26);
+		var nextBall = EPG.getElement("playboard").appendChild(newBallImg);
+		EPG.nextBall = nextBall;
 	},
 
-	getHookLeft : function() {
-		return parseInt(EPG.hookImg.style.left.match(/[-+]?\d+/g), 10);
+	arrowTurnRight : function() {
+		var arrowImg = EPG.getElement("arrowImg");
+		if (EPG.getArrowDegree() < 75) {
+			EPG.setArrowDegree(EPG.getArrowDegree() + 3);
+		}
 	},
 
-	getHookDegree : function() {
-		return parseInt(EPG.hookImg.style.transform.toString().match(/[-+]?\d+(\.\d+)?/g)[0], 10);
+	arrowTurnLeft : function() {
+		var arrowImg = EPG.getElement("arrowImg");
+		if (EPG.getArrowDegree() > -75) {
+			EPG.setArrowDegree(EPG.getArrowDegree() - 3);
+		}
 	},
 
-	setHookDegree : function(degree) {
-		// Set hook image degree
-		var hookImg = EPG.hookImg;
-		hookImg.style.transform = "rotate(" + degree + "deg)";
-
-		// Set line image degree
-		var lineImg = EPG.lineImg;
-		lineImg.style.transform = "rotate(" + degree + "deg)";
+	getArrowDegree : function() {
+		var arrowImg = EPG.getElement("arrowImg");
+		return parseInt(arrowImg.style.transform.toString().match(/[-+]?\d+(\.\d+)?/g)[0], 10);
 	},
 
-	createGold : function(goldNo, top, left) {
-		var goldImg = EPG.createImg("gold", null, top, left, parseInt(169 * GOLD_SIZE[goldNo], 10), parseInt(135 * GOLD_SIZE[goldNo], 10));
-		var gold = {
-			top : top,
-			left : left,
-			width : goldImg.style.width,
-			height : goldImg.style.height,
-			img : goldImg
-		};
-		if (EPG.isOutSideOfPlayBoard(gold)) {
-			return null;
-		}
-		for (var i = 0; i < EPG.goldList.length; i++) {
-			if (EPG.isNewItemCoverOthers(gold, EPG.goldList[i])) {
-				return null;
-			}
-		}
-		for (var i = 0; i < EPG.stoneList.length; i++) {
-			if (EPG.isNewItemCoverOthers(gold, EPG.stoneList[i])) {
-				return null;
-			}
-		}
-		EPG.getElement("playboard").appendChild(goldImg);
-		EPG.goldList.push(gold);
-		return gold;
-	},
-
-	createStone : function(stoneNo, top, left) {
-		var stoneImg = EPG.createImg("stone", null, top, left, parseInt(82 * STONE_SIZE[stoneNo], 10), parseInt(60 * STONE_SIZE[stoneNo], 10));
-		var stone = {
-			top : top,
-			left : left,
-			width : stoneImg.style.width,
-			height : stoneImg.style.height,
-			img : stoneImg
-		};
-		if (EPG.isOutSideOfPlayBoard(stone)) {
-			return null;
-		}
-		for (var i = 0; i < EPG.goldList.length; i++) {
-			if (EPG.isNewItemCoverOthers(stone, EPG.goldList[i])) {
-				return null;
-			}
-		}
-		for (var i = 0; i < EPG.stoneList.length; i++) {
-			if (EPG.isNewItemCoverOthers(stone, EPG.stoneList[i])) {
-				return null;
-			}
-		}
-		EPG.getElement("playboard").appendChild(stoneImg);
-		EPG.stoneList.push(stone);
-		return stone;
-	},
-
-	isOutSideOfPlayBoard : function(item) {
-		if (parseInt(item.top, 10) + parseInt(item.height, 10) > PLAYBOARD_HEIGHT
-				|| parseInt(item.left, 10) + parseInt(item.width, 10) > PLAYBOARD_WIDTH) {
-			return true;
-		}
-		return false;
-	},
-
-	isNewItemCoverOthers : function(item1, item2) {
-		var points = [];
-		points[0] = {
-			x : parseInt(item1.left, 10),
-			y : parseInt(item1.top, 10)
-		};
-		points[1] = {
-			x : parseInt(item1.left, 10) + parseInt(item1.width, 10),
-			y : parseInt(item1.top, 10)
-		};
-		points[2] = {
-			x : parseInt(item1.left, 10),
-			y : parseInt(item1.top, 10) + parseInt(item1.height, 10)
-		};
-		points[3] = {
-			x : parseInt(item1.left, 10) + parseInt(item1.width, 10),
-			y : parseInt(item1.top, 10) + parseInt(item1.height, 10)
-		};
-		points[4] = {
-			x : parseInt(item2.left, 10),
-			y : parseInt(item2.top, 10)
-		};
-		points[5] = {
-			x : parseInt(item2.left, 10) + parseInt(item2.width, 10),
-			y : parseInt(item2.top, 10)
-		};
-		points[6] = {
-			x : parseInt(item2.left, 10),
-			y : parseInt(item2.top, 10) + parseInt(item2.height, 10)
-		};
-		points[7] = {
-			x : parseInt(item2.left, 10) + parseInt(item2.width, 10),
-			y : parseInt(item2.top, 10) + parseInt(item2.height, 10)
-		};
-		for (var i = 0; i < 4; i++) {
-			if (EPG.isPointInsideRectangle(points[i], item2)) {
-				return true;
-			}
-		}
-		for (var i = 4; i < 8; i++) {
-			if (EPG.isPointInsideRectangle(points[i], item1)) {
-				return true;
-			}
-		}
-		return false;
-	},
-
-	isPointInsideRectangle : function(point, item) {
-		if (point.x >= parseInt(item.left, 10) && point.x <= parseInt(item.left, 10) + parseInt(item.width, 10) && point.y >= parseInt(item.top, 10)
-				&& point.y <= parseInt(item.top, 10) + parseInt(item.height, 10)) {
-			return true;
-		}
-		return false;
+	setArrowDegree : function(degree) {
+		var arrowImg = EPG.getElement("arrowImg");
+		arrowImg.style.transform = "rotate(" + degree + "deg)";
 	},
 
 	initGame : function() {
-		EPG.createHook();
-		var counter = 0;
-		while (counter < 5) {
-			var top = parseInt(Math.random() * PLAYBOARD_HEIGHT, 10);
-			var left = parseInt(Math.random() * PLAYBOARD_WIDTH, 10);
-			var gold = EPG.createGold(0, top, left);
-			if (gold != null) {
-				counter++;
-			}
+		var left = 0;
+		for (var i = 0; i < 13; i++) {
+			var color = parseInt(Math.random() * 4, 10);
+			EPG.createBall(BALL_COLOR[color], 0, left);
+			left += 38;
 		}
-		counter = 0;
-		while (counter < 3) {
-			var top = parseInt(Math.random() * PLAYBOARD_HEIGHT, 10);
-			var left = parseInt(Math.random() * PLAYBOARD_WIDTH, 10);
-			var gold = EPG.createGold(1, top, left);
-			if (gold != null) {
-				counter++;
-			}
+		var left = 19;
+		for (var i = 0; i < 12; i++) {
+			var color = parseInt(Math.random() * 4, 10);
+			EPG.createBall(BALL_COLOR[color], 33, left);
+			left += 38;
 		}
-		counter = 0;
-		while (counter < 2) {
-			var top = parseInt(Math.random() * PLAYBOARD_HEIGHT, 10);
-			var left = parseInt(Math.random() * PLAYBOARD_WIDTH, 10);
-			var gold = EPG.createGold(2, top, left);
-			if (gold != null) {
-				counter++;
-			}
+		var left = 0;
+		for (var i = 0; i < 13; i++) {
+			var color = parseInt(Math.random() * 4, 10);
+			EPG.createBall(BALL_COLOR[color], 66, left);
+			left += 38;
 		}
-		counter = 0;
-		while (counter < 2) {
-			var top = parseInt(Math.random() * PLAYBOARD_HEIGHT, 10);
-			var left = parseInt(Math.random() * PLAYBOARD_WIDTH, 10);
-			var stone = EPG.createStone(0, top, left);
-			if (stone != null) {
-				counter++;
-			}
+		var left = 19;
+		for (var i = 0; i < 12; i++) {
+			var color = parseInt(Math.random() * 4, 10);
+			EPG.createBall(BALL_COLOR[color], 99, left);
+			left += 38;
 		}
-		counter = 0;
-		while (counter < 2) {
-			var top = parseInt(Math.random() * PLAYBOARD_HEIGHT, 10);
-			var left = parseInt(Math.random() * PLAYBOARD_WIDTH, 10);
-			var stone = EPG.createStone(1, top, left);
-			if (stone != null) {
-				counter++;
-			}
-		}
+
+		var arrowImg = EPG.getElement("arrowImg");
+		arrowImg.style.transform = "rotate(0deg)";
+		arrowImg.style["transform-origin"] = "15px 56px 0px";
+
+		var color = parseInt(Math.random() * 4, 10);
+		EPG.createWaitingBall(BALL_COLOR[color]);
+		EPG.createNextBall();
 	},
 
 	getElement : function(id) {

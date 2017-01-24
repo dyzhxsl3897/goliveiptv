@@ -99,7 +99,7 @@ var EPG = {
 	},
 
 	isBallTouchLeftBoundary : function() {
-		if (EPG.getMovingBallLeft() <= 0) {
+		if (EPG.getMovingBallLeft() < 0) {
 			return true;
 		} else {
 			return false;
@@ -107,7 +107,7 @@ var EPG = {
 	},
 
 	isBallTouchRightBoundary : function() {
-		if (EPG.getMovingBallLeft() >= 468) {
+		if (EPG.getMovingBallLeft() > 468) {
 			return true;
 		} else {
 			return false;
@@ -148,21 +148,21 @@ var EPG = {
 
 	createBall : function(color, top, left) {
 		var newBallImg = EPG.createImg(color + "Ball", null, top, left, 38, 38);
-		var waitingBall = EPG.getElement("playboard").appendChild(newBallImg);
-		EPG.waitingBall = waitingBall;
+		EPG.getElement("playboard").appendChild(newBallImg);
+		EPG.waitingBall = newBallImg;
 	},
 
 	createWaitingBall : function(color) {
 		var newBallImg = EPG.createImg(color + "Ball", null, 366, 180, 38, 38);
-		var waitingBall = EPG.getElement("playboard").appendChild(newBallImg);
-		EPG.waitingBall = waitingBall;
+		EPG.getElement("playboard").appendChild(newBallImg);
+		EPG.waitingBall = newBallImg;
 	},
 
 	createNextBall : function() {
 		var color = parseInt(Math.random() * 4, 10);
 		var newBallImg = EPG.createImg(BALL_COLOR[color] + "Ball", null, 409, 185, 26, 26);
-		var nextBall = EPG.getElement("playboard").appendChild(newBallImg);
-		EPG.nextBall = nextBall;
+		EPG.getElement("playboard").appendChild(newBallImg);
+		EPG.nextBall = newBallImg;
 	},
 
 	arrowTurnRight : function() {

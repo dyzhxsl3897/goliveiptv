@@ -4,24 +4,24 @@
 
 var LobbyControl = {
 	pressUp : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
 		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].up;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
 	},
 	pressDown : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
 		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].down;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
 	},
 	pressLeft : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
 		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].left;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
 	},
 	pressRight : function() {
-		EPG.getElement("Link_" + EPG.currentCard).classList.remove("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
 		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].right;
-		EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
+		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
 	},
 	pressEnter : function() {
 		location.href = HomePageNavigation[EPG.currentCard].link;

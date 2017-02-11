@@ -14,4 +14,4 @@ document.onkeydown = function(e) {
 	}
 }
 
-EPG.getElement("Link_" + EPG.currentCard).classList.add("selected");
+classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");

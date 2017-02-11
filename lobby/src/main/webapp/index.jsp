@@ -37,6 +37,7 @@
 	<div id="Link_6" class="show"
 		style="position: absolute; top: 415px; left: 448px; width: 192px; height: 125px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">泡泡龙</div>
 	<script src="${pageContext.request.contextPath}/resources/js/const.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/cssutil.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/mylib.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/remoteoperation.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/init.js"></script>

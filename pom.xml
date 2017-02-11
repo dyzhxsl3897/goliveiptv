@@ -16,10 +16,5 @@
 
 	<modules>
 		<module>lobby</module>
-		<module>tetris</module>
-		<module>snakes</module>
-		<module>tohellwithjohnny</module>
-		<module>goldminer</module>
-		<module>paopaolong</module>
 	</modules>
 </project>

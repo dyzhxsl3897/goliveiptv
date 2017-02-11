@@ -1,6 +1,1 @@
-put -rp "/home/rof/clone/tetris/target/tetris.war" /home/lucas/deploy
-put -rp "/home/rof/clone/tohellwithjohnny/target/tohellwithjohnny.war" /home/lucas/deploy
-put -rp "/home/rof/clone/snakes/target/snakes.war" /home/lucas/deploy
-put -rp "/home/rof/clone/goldminer/target/goldminer.war" /home/lucas/deploy
-put -rp "/home/rof/clone/paopaolong/target/paopaolong.war" /home/lucas/deploy
 put -rp "/home/rof/clone/lobby/target/ROOT.war" /home/lucas/deploy

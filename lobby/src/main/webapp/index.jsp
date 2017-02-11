@@ -11,7 +11,8 @@
 
 <title>Good IPTV Games</title>
 </head>
-<body background="${pageContext.request.contextPath}/resources/images/home.png">
+<body style="background:url('${pageContext.request.contextPath}/resources/images/home.png') no-repeat;width:640px;height:530px;" bgcolor="transparent"
+	leftmargin="0" topmargin="0">
 	<img src="${pageContext.request.contextPath}/resources/images/dogcat.png" style="position: absolute; top: 37px; left: 55px; z-index: 999;" />
 	<img id="ICON_0" src="${pageContext.request.contextPath}/resources/images/btn_personal_center.png"
 		style="position: absolute; top: 32px; left: 482px; width: 152px; height: 46px;" />

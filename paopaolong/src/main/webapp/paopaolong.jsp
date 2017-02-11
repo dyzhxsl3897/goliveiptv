@@ -11,12 +11,25 @@
 
 <title>泡泡龙</title>
 </head>
-<body background="${pageContext.request.contextPath}/resources/images/Background.png">
-	<div id="playboard" style="position: absolute; top: 80px; left: 7px; width: 506px; height: 450px;"></div>
-	<img id="arrowImg" src="${pageContext.request.contextPath}/resources/images/arrow.png" style="position: absolute; top: 410px; left: 190px;" />
-	<script src="${pageContext.request.contextPath}/resources/js/const.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/mylib.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/remoteoperation.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/init.js"></script>
+<body>
+	<div style="z-index: 99">
+		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
+			<param name="ServerURL" value="http://202.99.114.28:9191/IPTVGameAPI/">
+			<param name="ResourcesURL" value="http://202.99.114.28:9191/IPTVGameResource/game_package/">
+			<param name="jad" value="${pageContext.request.contextPath}/games/paopaolong.jad">
+			<param name="jar" value="${pageContext.request.contextPath}/games/paopaolong.jar">
+			<param name="Province" value="GuangDong" />
+			<param name="Diqu" value="GuangDong">
+			<param name="userId" value="02211111111">
+			<param name="userType" value="3">
+			<param name="business_monthly" value="3">
+			<param name="beans" value="0">
+			<param name="gameCode" value="LTG_10034">
+			<param name="GameID" value="DefendFairyVillage2">
+			<param name="recoCode" value="LTR_10001">
+			<param name="NewInterface" value="true">
+			<param name="-Xkeypass" value="true">
+		</object>
+	</div>
 </body>
 </html>

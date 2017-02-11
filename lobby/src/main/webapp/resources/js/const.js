@@ -6,7 +6,9 @@
  * 按键键值定义
  */
 var KEY_BACK = 0x0008; // 返回/删除
+var PC_KEY_BACK = 8;// pc返回/删除
 var KEY_ENTER = 0x000D; // 确定
+var PC_KEY_ENTER = 13; // pc回车
 var KEY_PAGE_UP = 0x0021; // 上页
 var KEY_PAGE_DOWN = 0x0022; // 下页
 var KEY_LEFT = 0x0025; // 左
@@ -61,7 +63,7 @@ var HomePageNavigation = [//
 	link : "/"
 }, {
 	card : 6,
-	link : "/paopaolong"
+	link : "/paopaolong/paopaolong.jsp"
 } //
 ];
 

@@ -1,7 +1,25 @@
+@CHARSET "UTF-8";
+
 .show:hover {
 	border: 2px solid red;
 }
 
 .selected {
 	border: 2px solid red;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #000000;
+	font-family: Arial, 'Microsoft Yahei' !important;
+	font-size: 16px;
+	width: 640px;
+	height: 530px;
+	background-color:#000000;
+	/*overflow: hidden;*/
+}
+
+img {
+	border: 0;
 }

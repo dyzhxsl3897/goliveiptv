@@ -48,8 +48,7 @@ var HomePageNavigation = [//
 	link : "/"
 }, {
 	card : 1,
-	link : "/paopaolong/paopaolong.jsp"
-// link : "/tetris"
+	link : "/tetris/tetris.jsp"
 }, {
 	card : 2,
 	link : "/tohellwithjohnny/tohellwithjohnny.jsp"

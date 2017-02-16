@@ -30,13 +30,13 @@ window.document.onkeypress = function(keyEvent) {
 
 	keyEvent = keyEvent ? keyEvent : window.event;
 	var keyvalue = keyEvent.which ? keyEvent.which : keyEvent.keyCode;
-	if (keyvalue == KEY_RIGHT || keyCode == PC_KEY_RIGHT) {
+	if (keyvalue == KEY_RIGHT || keyvalue == PC_KEY_RIGHT) {
 		LobbyControl.pressRight();
-	} else if (keyvalue == KEY_LEFT || keyCode == PC_KEY_LEFT) {
+	} else if (keyvalue == KEY_LEFT || keyvalue == PC_KEY_LEFT) {
 		LobbyControl.pressLeft();
-	} else if (keyvalue == KEY_UP || keyCode == PC_KEY_UP) {
+	} else if (keyvalue == KEY_UP || keyvalue == PC_KEY_UP) {
 		LobbyControl.pressUp();
-	} else if (keyvalue == KEY_DOWN || keyCode == PC_KEY_DOWN) {
+	} else if (keyvalue == KEY_DOWN || keyvalue == PC_KEY_DOWN) {
 		LobbyControl.pressDown();
 	} else if (keyvalue == KEY_ENTER) {
 		LobbyControl.pressEnter();
@@ -86,7 +86,7 @@ window.document.onkeypress = function(keyEvent) {
 	}
 
 };
-
+document.onkeydown = window.document.onkeypress;
 /*-
  document.onkeydown = function(e) {
  e = e || window.event;

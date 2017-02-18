@@ -10,6 +10,11 @@
 <title>俄罗斯方块</title>
 </head>
 <body>
+	<div style="position: absolute; top: 50px; left: 0px;">
+		<h1>哥正在玩儿命给你的加载……</h1>
+		<h1>这里还需要个图 :)</h1>
+		<img alt="" src="/resources/images/loading.gif" style="width:435;height:45;">
+	</div>
 	<div style="z-index: 99">
 		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
 			<param name="ServerURL" value="http://202.99.114.28:9191/IPTVGameAPI/">

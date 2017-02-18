@@ -1,29 +1,86 @@
-/**
- * Remote key press function
- */
+function back() {
+	var url = decodeURIComponent('http://192.168.18.4:8080');
 
-var LobbyControl = {
-	pressUp : function() {
-		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].up;
-		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
-	},
-	pressDown : function() {
-		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].down;
-		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
-	},
-	pressLeft : function() {
-		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].left;
-		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
-	},
-	pressRight : function() {
-		classList(EPG.getElement("Link_" + EPG.currentCard)).remove("selected");
-		EPG.currentCard = HomePageCardMoveMatrix[EPG.currentCard].right;
-		classList(EPG.getElement("Link_" + EPG.currentCard)).add("selected");
-	},
-	pressEnter : function() {
-		location.href = HomePageNavigation[EPG.currentCard].link;
+	// 有款烽火机顶盒不支持 decodeURIComponent 这个函数
+	if (url == null || url == '') {
+
+		url = 'http://192.168.18.4:8080';
 	}
+
+	window.location.href = url;
 }
+window.JVM_EVENT = {
+	DOWNLOAD_START : 0,
+	DOWNLOAD_END : 1,
+	PLAY_START : 2,
+	PLAY_END : 3,
+	DOWNLOAD_ERROR : 4,
+	PLAY_ERROR : 5,
+	RESULT_ERROR : 1,
+	isError : function(eventResult) {
+		if (eventResult == RESULT_ERROR)
+			return true;
+		return false;
+	},
+	notError : function(eventResult) {
+		return !this.isError(eventResult);
+	}
+};
+window.document.onkeypress = function(keyEvent) {
+
+	keyEvent = keyEvent ? keyEvent : window.event;
+	var keyvalue = keyEvent.which ? keyEvent.which : keyEvent.keyCode;
+	if (keyvalue == KEY_RIGHT || keyvalue == PC_KEY_RIGHT) {
+		EPG.pressRight();
+	} else if (keyvalue == KEY_LEFT || keyvalue == PC_KEY_LEFT) {
+		EPG.pressLeft();
+	} else if (keyvalue == KEY_UP || keyvalue == PC_KEY_UP) {
+		EPG.pressUp();
+	} else if (keyvalue == KEY_DOWN || keyvalue == PC_KEY_DOWN) {
+		EPG.pressDown();
+	} else if (keyvalue == KEY_ENTER) {
+		EPG.pressEnter();
+	} else if (keyvalue == 0x0300) {
+		var msg = Utility.getEvent();
+		msg = eval('(' + msg + ')');
+		var type = msg.type;
+		var eventCode = msg.event_code;
+		if (type != 'EVENT_JVM_CLIENT') {
+			return;
+		}
+		switch (eventCode) {
+		case JVM_EVENT.DOWNLOAD_START:
+			break;
+		case JVM_EVENT.DOWNLOAD_END:
+			break;
+		case JVM_EVENT.PLAY_START:
+			break;
+		case JVM_EVENT.PLAY_END: {
+			showPage();
+			back();
+		}
+			break;
+		case JVM_EVENT.DOWNLOAD_ERROR: {
+			showPage();
+			back();
+		}
+			break;
+		case JVM_EVENT.PLAY_ERROR: {
+			showPage();
+			back();
+		}
+			break;
+		default:
+			break;
+		}
+	} else {
+		var msg = Utility.getEvent();
+		msg = eval('(' + msg + ')');
+		var eventCode = msg.event_code;
+		if (eventCode == undefined) {
+			back();
+		}
+	}
+
+};
+document.onkeydown = window.document.onkeypress;

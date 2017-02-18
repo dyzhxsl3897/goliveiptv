@@ -14,8 +14,8 @@
 		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
 			<param name="ServerURL" value="http://202.99.114.28:9191/IPTVGameAPI/">
 			<param name="ResourcesURL" value="http://202.99.114.28:9191/IPTVGameResource/game_package/">
-			<param name="jad" value="${pageContext.request.contextPath}/goldminer/resources/games/goldminer.jad">
-			<param name="jar" value="${pageContext.request.contextPath}/goldminer/resources/games/goldminer.jar">
+			<param name="jad" value="${pageContext.request.contextPath}/resources/games/goldminer/goldminer.jad">
+			<param name="jar" value="${pageContext.request.contextPath}/resources/games/goldminer/goldminer.jar">
 			<param name="Province" value="GuangDong" />
 			<param name="Diqu" value="GuangDong">
 			<param name="userId" value="02211111111">
@@ -30,6 +30,7 @@
 		</object>
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/const.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/cssutil.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/mylib.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/remoteoperation.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/init.js"></script>

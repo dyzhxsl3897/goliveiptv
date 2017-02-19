@@ -42,7 +42,7 @@ var HomePageNavigation = [//
 	link : "/tohellwithjohnny/tohellwithjohnny.jsp"
 }, {
 	card : 3,
-	link : "/snakes/snakes.jsp"
+	link : "/sokoban/sokoban.jsp"
 }, {
 	card : 4,
 	link : "/goldminer/goldminer.jsp"

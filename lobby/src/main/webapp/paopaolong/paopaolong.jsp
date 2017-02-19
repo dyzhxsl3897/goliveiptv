@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div style="position: absolute; top: 50px; left: 0px;">
-		<h1>哥正在玩儿命给你的加载……</h1>
+		<h1>哥正在玩儿命给你加载……</h1>
 		<h1>这里还需要个图 :)</h1>
 		<img alt="" src="/resources/images/loading.gif" style="width:435;height:45;">
 	</div>

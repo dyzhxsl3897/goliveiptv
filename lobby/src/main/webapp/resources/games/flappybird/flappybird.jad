@@ -1,5 +1,5 @@
 MIDlet-1: MyMIDlet,,com.zhongdan.games.flappybird.MyMIDlet
-MIDlet-Jar-Size: 74300
+MIDlet-Jar-Size: 74222
 MIDlet-Jar-URL: flappybird.jar
 MIDlet-Name: flappybird Midlet Suite
 MIDlet-Vendor: Midlet Suite Vendor

@@ -1,13 +1,5 @@
 @CHARSET "UTF-8";
 
-.show:hover {
-	border: 2px solid red;
-}
-
-.selected {
-	border: 2px solid red;
-}
-
 body {
 	margin: 0;
 	padding: 0;
@@ -22,4 +14,8 @@ body {
 
 img {
 	border: 0;
+}
+
+div.show.select div img.select:hover{
+	display: block;
 }

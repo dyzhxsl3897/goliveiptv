@@ -74,7 +74,8 @@ window.document.onkeypress = function(keyEvent) {
 			break;
 		}
 	} else {
-		var msg = Utility.getEvent();
+//		var msg = Utility.getEvent();
+		var msg = "other options";
 		msg = eval('(' + msg + ')');
 		var eventCode = msg.event_code;
 		if (eventCode == undefined) {

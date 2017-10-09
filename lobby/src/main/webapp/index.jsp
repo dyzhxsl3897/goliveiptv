@@ -18,11 +18,16 @@
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_tetris.jpg">
 		</div>
 		<div style="position: absolute; top: 0px; left: 0px; width: 171px; height: 224px;">
-			<img style="display: block;" class="select" alt="" src="${pageContext.request.contextPath}/resources/images/175-230.gif">
+			<img style="display: none;" class="select" alt="" src="${pageContext.request.contextPath}/resources/images/175-230.gif">
 		</div>
 	</div>
 	<div id="Link_2" class="show" style="position: absolute; top: 137px; left: 355px; width: 146px; height: 98px;">
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_tohellwithjohnny.jpg">
+		<div>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_tohellwithjohnny.jpg">
+		</div>
+		<div style="position: absolute; top: 0px; left: 0px; width: 146px; height: 98px;">
+			<img style="display: none;" class="select" alt="" src="${pageContext.request.contextPath}/resources/images/150-102.gif">
+		</div>
 	</div>
 	<div id="Link_3" class="show" style="position: absolute; top: 264px; left: 355px; width: 146px; height: 98px;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_sokoban.jpg">

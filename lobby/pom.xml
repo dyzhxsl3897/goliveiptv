@@ -112,6 +112,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>ROOT</finalName>
+		<finalName>lobby</finalName>
 	</build>
 </project>

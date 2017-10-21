@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.zhongdan.lobby.bl.services.AiChineseChessService;
 import com.zhongdan.lobby.bl.services.AiWuziqiService;
 
 @Path("/ai")
@@ -21,6 +22,9 @@ public class AiControllers {
 	@Autowired
 	AiWuziqiService aiWuziqiService;
 
+	@Autowired
+	AiChineseChessService aiChineseChessService;
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -29,10 +33,23 @@ public class AiControllers {
 		Map<String, Object> status = new HashMap<String, Object>();
 		String returnStatus = "success";
 
-		System.out.println(requestBody.toString());
-
 		Map<String, Object> nextPoint = aiWuziqiService.nextStep(requestBody);
 		status.put("nextPoint", nextPoint);
+
+		status.put("status", returnStatus);
+		return status;
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/chinesechess/nextstep")
+	public Map<String, Object> chineseChessNextStep(Map<String, Object> requestBody) throws Exception {
+		Map<String, Object> status = new HashMap<String, Object>();
+		String returnStatus = "success";
+
+		String moveStep = aiChineseChessService.moveStep(requestBody);
+		status.put("moveStep", moveStep);
 
 		status.put("status", returnStatus);
 		return status;

@@ -99,7 +99,7 @@ public class SearchEngine {
 		// limitTimer = CLOCK_M * 20;
 		depth = 8;
 		properTimer = CLOCK_S * 2;
-		limitTimer = CLOCK_S * 8;
+		limitTimer = CLOCK_S * 2;
 	}
 
 	// Begin History and Hash Table Procedures

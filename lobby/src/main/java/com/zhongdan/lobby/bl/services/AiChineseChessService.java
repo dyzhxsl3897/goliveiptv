@@ -29,6 +29,6 @@ public class AiChineseChessService {
 			e.printStackTrace();
 		}
 
-		return move.toString();
+		return move == null ? "" : move.toString();
 	}
 }

@@ -93,9 +93,13 @@ public class SearchEngine {
 			PvLine[i] = new MoveNode();
 		}
 		newHash(17, 14);
+		// 设置超时和迭代搜索层数 setup timeout and search depth
+		// depth = 8;
+		// properTimer = CLOCK_M * 1;
+		// limitTimer = CLOCK_M * 20;
 		depth = 8;
-		properTimer = CLOCK_M * 1;
-		limitTimer = CLOCK_M * 20;
+		properTimer = CLOCK_S * 2;
+		limitTimer = CLOCK_S * 8;
 	}
 
 	// Begin History and Hash Table Procedures

@@ -24,7 +24,7 @@
 	<script type="text/javascript">
 		// 返回
 		function back() {
-			window.location.href = "http://18.223.252.25/lobby/game_home.jsp";
+			window.location.href = "http://18.223.252.25:8080/lobby/game_home.jsp";
 		}
 		window.JVM_EVENT = {
 			DOWNLOAD_START : 0,

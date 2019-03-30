@@ -1,5 +1,5 @@
 function back() {
-	var url = decodeURIComponent('http://18.223.252.25:8080');
+	var url = decodeURIComponent('http://18.223.252.25:8080/lobby/game_home.jsp');
 
 	// 有款烽火机顶盒不支持 decodeURIComponent 这个函数
 	if (url == null || url == '') {

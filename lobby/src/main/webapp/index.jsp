@@ -2,49 +2,71 @@
 <%@ pagecontentType="text/html;charset=UTF-8" %>
 <html lang="zh">
 <head>
-<meta name="page-view-size" content="640*530" />
 <meta http-equiv="Expires" CONTENT="0">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">
 <link rel="shortcut icon" href="#" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jqueryui/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jqueryui/jquery-ui-1.12.1.custom/jquery-ui.theme.min.css">
+
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.1.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/resources/jqueryui/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/resources/jqueryupload/jQuery-File-Upload-9.28.0/js/vendor/jquery.ui.widget.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jqueryupload/jQuery-File-Upload-9.28.0/js/jquery.iframe-transport.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jqueryupload/jQuery-File-Upload-9.28.0/js/jquery.fileupload.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jqueryupload/jQuery-File-Upload-9.28.0/js/jquery.fileupload-process.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jqueryupload/jQuery-File-Upload-9.28.0/js/jquery.fileupload-validate.js"></script>
+
 <title>Good IPTV Games</title>
 </head>
-<body style="background:url('${pageContext.request.contextPath}/resources/images/home.png') no-repeat;width:640px;height:530px;" bgcolor="transparent">
-	<div id="Link_0" class="show" style="position: absolute; top: 24px; left: 548px; width: 83px; height: 40px;"></div>
-	<div id="Link_1" class="show" style="position: absolute; top: 135px; left: 139px; width: 171px; height: 224px;">
+<body>
+	<div>
+		<img alt="" src="${pageContext.request.contextPath}/resources/images/index/iptv.png">
+	</div>
+	<div style="position: fixed; left: 60px;">
 		<div>
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_tetris.jpg">
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/index/font_already_uploaded.png">
 		</div>
-		<div style="position: absolute; top: 0px; left: 0px; width: 171px; height: 224px;">
-			<img style="display: none;" class="select" alt="" src="${pageContext.request.contextPath}/resources/images/175-230.gif">
+		<div style="position: fixed; top: 40px; left: 450px;">
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/index/font_help.png">
 		</div>
-	</div>
-	<div id="Link_2" class="show" style="position: absolute; top: 137px; left: 355px; width: 146px; height: 98px;">
 		<div>
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_tohellwithjohnny.jpg">
+			<button class="ui-button ui-widget ui-corner-all" id="refreshAllGamesBtn" onclick="reloadAllGames();">刷新游戏列表</button>
+			<div class="menu">
+				<ul id="menu">
+				</ul>
+			</div>
+			<div class="jquery-fileupload">
+				<div class="">
+					<input id="uploadImg" type="file" name="uploadImg" multiple style="display: none" />
+					<button class="ui-button ui-widget ui-corner-all" id="chooseFile">+选择文件</button>
+					<button class="ui-button ui-widget ui-corner-all" id="uploadFile">~开始上传</button>
+					<button class="ui-button ui-widget ui-corner-all" id="rechooseFile">+重新选择</button>
+				</div>
+				<div id="progress">
+					<div class="bar" style="width: 0%;"></div>
+				</div>
+			</div>
 		</div>
-		<div style="position: absolute; top: 0px; left: 0px; width: 146px; height: 98px;">
-			<img style="display: none;" class="select" alt="" src="${pageContext.request.contextPath}/resources/images/150-102.gif">
+		<div>
+			<div id="upload_successfully_div" style="position: relative; top: 20px; left: 10px; display: none;">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/index/font_upload_successfully.png">
+			</div>
+			<div id="upload_failed_div" style="position: relative; top: 20px; left: 10px; display: none;">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/index/font_upload_failed.png">
+			</div>
 		</div>
 	</div>
-	<div id="Link_3" class="show" style="position: absolute; top: 264px; left: 355px; width: 146px; height: 98px;">
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_sokoban.jpg">
-	</div>
-	<div id="Link_4" class="show" style="position: absolute; top: 392px; left: 69px; width: 146px; height: 98px;">
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_goldminer.jpg">
-	</div>
-	<div id="Link_5" class="show" style="position: absolute; top: 392px; left: 246px; width: 146px; height: 98px;">
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_flappybird.jpg">
-	</div>
-	<div id="Link_6" class="show" style="position: absolute; top: 392px; left: 424px; width: 146px; height: 98px;">
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/entry_paopaolong.jpg">
-	</div>
-	<script src="${pageContext.request.contextPath}/resources/js/const.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/cssutil.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/mylib.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/remoteoperation.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/init.js"></script>
+
+	<script type="text/javascript">
+		function getContextPath() {
+			return "${pageContext.request.contextPath}";
+		}
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </body>
 </html>

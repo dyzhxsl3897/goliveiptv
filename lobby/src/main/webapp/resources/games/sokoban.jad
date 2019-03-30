@@ -1,0 +1,8 @@
+MIDlet-1: MainMIDlet,,com.zhongdan.games.sokoban.MyMIDlet
+MIDlet-Jar-Size: 417673
+MIDlet-Jar-URL: sokoban.jar
+MIDlet-Name: sokoban Midlet Suite
+MIDlet-Vendor: Midlet Suite Vendor
+MIDlet-Version: 1.0.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

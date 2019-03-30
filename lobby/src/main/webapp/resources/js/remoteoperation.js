@@ -1,10 +1,9 @@
 function back() {
-	var url = decodeURIComponent('http://192.168.18.4:8080');
+	var url = decodeURIComponent('http://18.223.252.25');
 
 	// 有款烽火机顶盒不支持 decodeURIComponent 这个函数
 	if (url == null || url == '') {
-
-		url = 'http://192.168.18.4:8080';
+		url = 'http://18.223.252.25/lobby/game_home.jsp';
 	}
 
 	window.location.href = url;
@@ -74,7 +73,7 @@ window.document.onkeypress = function(keyEvent) {
 			break;
 		}
 	} else {
-//		var msg = Utility.getEvent();
+		// var msg = Utility.getEvent();
 		var msg = "other options";
 		msg = eval('(' + msg + ')');
 		var eventCode = msg.event_code;
@@ -84,4 +83,3 @@ window.document.onkeypress = function(keyEvent) {
 	}
 
 };
-document.onkeydown = window.document.onkeypress;

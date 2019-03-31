@@ -21,7 +21,7 @@ var EPG = {
 	},
 	pressEnter : function() {
 		var gameId = document.getElementsByClassName("selected")[0].id;
-		window.location.href = "http://18.223.252.25:8080/lobby/game.jsp?gamename="
+		window.location.href = "http://39.98.243.254:8080/lobby/game.jsp?gamename="
 				+ gameId;
 	}
 };

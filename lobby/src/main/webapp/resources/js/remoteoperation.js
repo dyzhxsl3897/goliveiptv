@@ -1,9 +1,9 @@
 function back() {
-	var url = decodeURIComponent('http://18.223.252.25:8080/lobby/game_home.jsp');
+	var url = decodeURIComponent('http://39.98.243.254:8080/lobby/game_home.jsp');
 
 	// 有款烽火机顶盒不支持 decodeURIComponent 这个函数
 	if (url == null || url == '') {
-		url = 'http://18.223.252.25:8080/lobby/game_home.jsp';
+		url = 'http://39.98.243.254:8080/lobby/game_home.jsp';
 	}
 
 	window.location.href = url;

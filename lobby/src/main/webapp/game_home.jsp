@@ -17,7 +17,7 @@
 %>
 <html>
 <head>
-<meta name="page-view-size" content="640*360" />
+<meta name="page-view-size" content="640*530" />
 <meta http-equiv="Expires" CONTENT="0">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">

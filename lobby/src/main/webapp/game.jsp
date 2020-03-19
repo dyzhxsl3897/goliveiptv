@@ -2,7 +2,7 @@
 <%@ pagecontentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-<meta name="page-view-size" content="644*364" />
+<meta name="page-view-size" content="644*534" />
 <meta http-equiv="Expires" CONTENT="0">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">
@@ -16,7 +16,7 @@
 		</div>
 	</div>
 	<div style="z-index: 99">
-		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="364">
+		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
 			<param name="jad" value="${pageContext.request.contextPath}/resources/games/${param.gamename}.jad">
 			<param name="jar" value="${pageContext.request.contextPath}/resources/games/${param.gamename}.jar">
 		</object>

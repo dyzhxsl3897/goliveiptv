@@ -62,13 +62,6 @@
 			}
 		}
 
-		function loadBuildVersion() {
-			$.get("${pageContext.request.contextPath}/buildversion.txt", function(data) {
-				$("#headerTxt").text("当前大厅测试版本 (" + data + ")");
-			});
-		}
-
-		loadBuildVersion();
 		reloadAllGames();
 	</script>
 </body>

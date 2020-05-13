@@ -36,7 +36,7 @@
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/index/font_help.png">
 		</div>
 		<div>
-			<button class="ui-button ui-widget ui-corner-all" id="refreshAllGamesBtn" onclick="reloadAllGames();">刷新游戏列表</button>
+			<button class="ui-button ui-widget ui-corner-all" id="refreshAllGamesBtn" onclick="$indexJs.reloadAllGames();">刷新游戏列表</button>
 			<div class="menu">
 				<ul id="menu">
 				</ul>

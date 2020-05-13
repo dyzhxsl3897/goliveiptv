@@ -5,7 +5,7 @@
 <meta http-equiv="Expires" CONTENT="0">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.png" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jqueryui/jquery-ui-1.12.1.custom/jquery-ui.min.css">

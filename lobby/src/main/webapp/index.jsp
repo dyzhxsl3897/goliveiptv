@@ -150,7 +150,9 @@
 				})
 				// 上传请求成功时触发的回调函数
 				.on("fileuploaddone", function(e, data) {
-					console.log(data.result);
+					$("#chooseFile").hide();
+					$("#uploadFile").show();
+					$("#rechooseFile").show();
 					$("#upload_failed_div").hide();
 					$("#upload_successfully_div").show();
 					$indexJs.reloadAllGames();

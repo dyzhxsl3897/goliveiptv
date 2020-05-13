@@ -24,6 +24,7 @@
 <title>Good IPTV Games</title>
 </head>
 <body>
+	<h3 id="headerTxt"></h3>
 	<div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/index/iptv.png">
 	</div>
@@ -66,6 +67,16 @@
 		function getContextPath() {
 			return "${pageContext.request.contextPath}";
 		}
+
+		$indexJs.loadBuildVersion = function() {
+			$.get("${pageContext.request.contextPath}/buildversion.txt", function(data) {
+				$("#headerTxt").text("云游互动当前测试版本 (" + data + ")");
+			});
+		};
+
+		$(document).ready(function() {
+			$indexJs.loadBuildVersion();
+		});
 	</script>
 	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </body>

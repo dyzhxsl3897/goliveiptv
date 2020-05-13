@@ -16,8 +16,9 @@
 		<maven.skip.test>true</maven.skip.test>
 		<java.version>1.7</java.version>
 		<spring.version>4.1.0.RELEASE</spring.version>
-		<jersey.version>2.13</jersey.version>
+		<jersey.version>2.26</jersey.version>
 		<jersey.client.version>1.19</jersey.client.version>
+		<jackson.core>2.11.0</jackson.core>
 		<apache.commons.lang.version>3.3.2</apache.commons.lang.version>
 		<log4j.version>1.2.17</log4j.version>
 		<servelt.version>3.0.1</servelt.version>
@@ -52,7 +53,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.ext</groupId>
-			<artifactId>jersey-spring3</artifactId>
+			<artifactId>jersey-spring4</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
@@ -73,7 +74,17 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.2.2</version>
+			<version>${jackson.core}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.core}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.core}</version>
 		</dependency>
 
 		<!-- JSON -->

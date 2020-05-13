@@ -68,6 +68,8 @@
 			return "${pageContext.request.contextPath}";
 		}
 
+		var $indexJs = {};
+
 		$indexJs.loadBuildVersion = function() {
 			$.get("${pageContext.request.contextPath}/buildversion.txt", function(data) {
 				$("#headerTxt").text("云游互动当前测试版本 (" + data + ")");

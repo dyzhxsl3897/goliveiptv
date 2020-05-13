@@ -153,7 +153,7 @@
 					console.log(data.result);
 					$("#upload_failed_div").hide();
 					$("#upload_successfully_div").show();
-					reloadAllGames();
+					$indexJs.reloadAllGames();
 				})
 				// 上传请求结束后，不管成功，错误或者中止都会被触发
 				.on("fileuploadalways", function(e, data) {

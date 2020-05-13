@@ -74,7 +74,7 @@
 			$indexJs.reloadAllGames = function() {
 				$("#menu").html("");
 	
-				$.get(getContextPath() + "/rest/admin/getallgames", function(data) {
+				$.get($indexJs.getContextPath() + "/rest/admin/getallgames", function(data) {
 					var allGames = data.allGames;
 					var i;
 					for (i = 0; i < allGames.length; i++) {
@@ -89,7 +89,7 @@
 				});
 	
 				$('#uploadImg').fileupload({
-					url : getContextPath() + '/rest/admin/uploadgame',
+					url : $indexJs.getContextPath() + '/rest/admin/uploadgame',
 					Type : 'POST',
 					autoUpload : false,
 					acceptFileTypes : /(jar|jad)$/i,

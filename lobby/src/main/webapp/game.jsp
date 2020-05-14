@@ -8,7 +8,12 @@
 			.getWebApplicationContext(this.getServletContext());
 	DefaultProperties defaultProperties = (DefaultProperties) context.getBean("com.zhongdan.lobby.bl.utils.DefaultProperties");
 	String gameurl = defaultProperties.getProperty("game.path");
+	String gamename = request.getParameter("gamename");
 	gameurl = gameurl.replaceAll("\\\\", "\\\\\\\\");
+	String jadurl = gameurl + "/" + gamename + ".jad";
+	String jarurl = gameurl + "/" + gamename + ".jar";
+	System.out.println(jadurl);
+	System.out.println(jarurl);
 %>
 <html>
 <head>
@@ -28,8 +33,8 @@
 	</div>
 	<div style="z-index: 99">
 		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
-			<param name="jad" value="<%=gameurl%>/${param.gamename}.jad">
-			<param name="jar" value="<%=gameurl%>/${param.gamename}.jar">
+			<param name="jad" value="<%=jadurl%>">
+			<param name="jar" value="<%=jarurl%>">
 			<param name="userid" value="053702181995_216">
 			<param name="apiurl" value="http://39.98.243.254:8080/lobby/rest">
 			<param name="imageurl" value="imageurl">

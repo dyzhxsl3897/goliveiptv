@@ -18,8 +18,8 @@
 	</div>
 	<div style="z-index: 99">
 		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
-			<param name="jad" value="http://39.98.243.254:8080/lobby/rest/resources/jad/${param.gamename}">
-            <param name="jar" value="http://39.98.243.254:8080/lobby/rest/resources/jar/${param.gamename}">
+			<param name="jad" value="${pageContext.request.contextPath}/resources/games/${param.gamename}.jad">
+            <param name="jar" value="${pageContext.request.contextPath}/resources/games/${param.gamename}.jar">
 			<param name="userid" value="053702181995_216">
 			<param name="apiurl" value="http://39.98.243.254:8080/lobby/rest">
 			<param name="imageurl" value="imageurl">

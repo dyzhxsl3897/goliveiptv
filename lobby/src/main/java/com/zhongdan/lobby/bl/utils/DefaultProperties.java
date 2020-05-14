@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("com.zhongdan.lobby.bl.utils.DefaultProperties")
 public class DefaultProperties {
 
 	@Autowired

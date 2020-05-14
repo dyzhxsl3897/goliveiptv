@@ -1,20 +1,5 @@
-<%@page import="org.springframework.web.context.WebApplicationContext"%>
-<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
-<%@page import="com.zhongdan.lobby.bl.utils.DefaultProperties"%>
 <%@ page isELIgnored="false"%>
 <%@ pagecontentType="text/html;charset=UTF-8" %>
-<%
-	WebApplicationContext context = WebApplicationContextUtils
-			.getWebApplicationContext(this.getServletContext());
-	DefaultProperties defaultProperties = (DefaultProperties) context.getBean("com.zhongdan.lobby.bl.utils.DefaultProperties");
-	String gameurl = defaultProperties.getProperty("game.path");
-	String gamename = request.getParameter("gamename");
-	gameurl = gameurl.replaceAll("\\\\", "\\\\\\\\");
-	String jadurl = gameurl + "/" + gamename + ".jad";
-	String jarurl = gameurl + "/" + gamename + ".jar";
-	System.out.println(jadurl);
-	System.out.println(jarurl);
-%>
 <html>
 <head>
 <meta name="page-view-size" content="644*534" />
@@ -33,8 +18,8 @@
 	</div>
 	<div style="z-index: 99">
 		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
-			<param name="jad" value="<%=jadurl%>">
-			<param name="jar" value="<%=jarurl%>">
+			<param name="jad" value="http://39.98.243.254:8080/lobby/rest/resources/jad/${param.gamename}">
+            <param name="jar" value="http://39.98.243.254:8080/lobby/rest/resources/jar/${param.gamename}">
 			<param name="userid" value="053702181995_216">
 			<param name="apiurl" value="http://39.98.243.254:8080/lobby/rest">
 			<param name="imageurl" value="imageurl">

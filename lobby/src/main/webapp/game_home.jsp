@@ -30,10 +30,10 @@
 <title>游戏页面</title>
 </head>
 <body>
-	<h3 id="headerTxt"></h3>
 	<div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/game_home/iptv.png">
 	</div>
+	<h3 id="headerTxt"></h3>
 	<div>
 		<ul id="games">
 		</ul>

@@ -102,7 +102,7 @@
 				}
 			}
 		};
-		if (typeof stbModel != 'undefined' && stbModel == 'EC2108U_pub') {
+		if (stbModel == 'EC2108U_pub') {
 			if (window.history && window.history.pushState) {
 				window.history.pushState('forward', null, '#');
 				window.addEventListener('popstate', forbidBack);

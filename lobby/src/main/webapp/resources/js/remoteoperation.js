@@ -25,8 +25,24 @@ window.JVM_EVENT = {
 		return !this.isError(eventResult);
 	}
 };
-window.document.onkeypress = function(keyEvent) {
 
+window.document.onkeydown = function(keyEvent) {
+	keyEvent = keyEvent ? keyEvent : window.event;
+	var keyvalue = keyEvent.which ? keyEvent.which : keyEvent.keyCode;
+	if (keyvalue == PC_KEY_RIGHT) {
+		EPG.pressRight();
+	} else if (keyvalue == PC_KEY_LEFT) {
+		EPG.pressLeft();
+	} else if (keyvalue == PC_KEY_UP) {
+		EPG.pressUp();
+	} else if (keyvalue == PC_KEY_DOWN) {
+		EPG.pressDown();
+	} else if (keyvalue == KEY_ENTER) {
+		EPG.pressEnter();
+	}
+}
+
+window.document.onkeypress = function(keyEvent) {
 	keyEvent = keyEvent ? keyEvent : window.event;
 	var keyvalue = keyEvent.which ? keyEvent.which : keyEvent.keyCode;
 	if (keyvalue == KEY_RIGHT || keyvalue == PC_KEY_RIGHT) {

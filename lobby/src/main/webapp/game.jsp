@@ -6,7 +6,7 @@
 <meta http-equiv="Expires" CONTENT="0">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.png" />
 <title>游戏页面</title>
 </head>
 <body>
@@ -102,7 +102,7 @@
 				}
 			}
 		};
-		if (stbModel == 'EC2108U_pub') {
+		if (typeof stbModel != 'undefined' && stbModel == 'EC2108U_pub') {
 			if (window.history && window.history.pushState) {
 				window.history.pushState('forward', null, '#');
 				window.addEventListener('popstate', forbidBack);

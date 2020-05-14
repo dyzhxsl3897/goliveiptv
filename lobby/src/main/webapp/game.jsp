@@ -20,7 +20,7 @@
 			<param name="jad" value="${pageContext.request.contextPath}/resources/games/${param.gamename}.jad">
 			<param name="jar" value="${pageContext.request.contextPath}/resources/games/${param.gamename}.jar">
 			<param name="userid" value="053702181995_216">
-			<param name="apiurl" value="httpapiurl">
+			<param name="apiurl" value="http://39.98.243.254:8080/lobby/rest">
 			<param name="imageurl" value="imageurl">
 			<param name="audiourl" value="audiourl">
 		</object>

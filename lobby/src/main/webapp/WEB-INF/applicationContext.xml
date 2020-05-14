@@ -17,5 +17,9 @@
 	</bean>
 
 	<util:properties id="lobbyProps" location="classpath:/lobby.properties" />
+	<util:properties id="databaseProps" location="classpath:/database.properties" />
+	
+	<!-- Database configuration -->
+	<import resource="DataSource.xml" />
 
 </beans>

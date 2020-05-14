@@ -27,12 +27,14 @@ public class AdminService {
 	public List<String> getAllGames() {
 		List<String> allGames = new ArrayList<>();
 
-		String gamePath = defaultProperties.getProperties(GAME_PATH);
+		String gamePath = defaultProperties.getProperty(GAME_PATH);
 		File[] files = new File(gamePath).listFiles();
 
-		for (File file : files) {
-			if (file.isFile() && file.getName().endsWith(".jar")) {
-				allGames.add(file.getName().substring(0, file.getName().length() - 4));
+		if (files != null && files.length > 0) {
+			for (File file : files) {
+				if (file.isFile() && file.getName().endsWith(".jar")) {
+					allGames.add(file.getName().substring(0, file.getName().length() - 4));
+				}
 			}
 		}
 
@@ -42,7 +44,7 @@ public class AdminService {
 	public List<String> getAllAvailableGames() {
 		List<String> allGames = new ArrayList<>();
 
-		String gamePath = defaultProperties.getProperties(GAME_PATH);
+		String gamePath = defaultProperties.getProperty(GAME_PATH);
 		File[] files = new File(gamePath).listFiles();
 
 		for (File file : files) {
@@ -72,7 +74,7 @@ public class AdminService {
 	}
 
 	public void uploadGames(InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {
-		String gamePath = defaultProperties.getProperties(GAME_PATH);
+		String gamePath = defaultProperties.getProperty(GAME_PATH);
 		String fileName = fileDetail.getFileName();
 		Files.deleteIfExists(Paths.get(gamePath + "/" + fileName));
 

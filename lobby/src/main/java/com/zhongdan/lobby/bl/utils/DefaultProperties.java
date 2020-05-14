@@ -2,6 +2,8 @@ package com.zhongdan.lobby.bl.utils;
 
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +13,24 @@ public class DefaultProperties {
 	@Autowired
 	private Properties lobbyProps;
 
+	@Autowired
+	private Properties databaseProps;
+
+	private Properties allProps;
+
 	private DefaultProperties() {
 	}
 
-	public String getProperties(String propertyName) {
-		String env = System.getProperty("current.env");
-		return lobbyProps.getProperty(propertyName + "." + env);
+	@PostConstruct
+	private void initializeProperties() {
+		allProps = new Properties();
+		allProps.putAll(databaseProps);
+		allProps.putAll(lobbyProps);
+	}
+
+	public String getProperty(String propertyName) {
+		String env = StringUtil.defaultIfEmpty(System.getProperty("current.env"), "LOCAL");
+		return allProps.getProperty(propertyName + "." + env);
 	}
 
 }

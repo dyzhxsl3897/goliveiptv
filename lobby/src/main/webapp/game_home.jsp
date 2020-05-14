@@ -30,6 +30,7 @@
 <title>游戏页面</title>
 </head>
 <body>
+	<h3 id="headerTxt"></h3>
 	<div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/game_home/iptv.png">
 	</div>
@@ -62,6 +63,26 @@
 			}
 		}
 
+		function loadBuildVersion()
+		{
+		    var rawFile = new XMLHttpRequest();
+		    rawFile.open("GET", 'buildversion.txt', false);
+		    rawFile.onreadystatechange = function ()
+		    {
+		        if(rawFile.readyState === 4)
+		        {
+		            if(rawFile.status === 200 || rawFile.status == 0)
+		            {
+		                var buildversion = rawFile.responseText;
+		                var allText = "当前游戏大厅测试版本 (" + buildversion + ")";
+		                document.getElementById("headerTxt").innerHTML = allText;
+		            }
+		        }
+		    }
+		    rawFile.send(null);
+		}
+
+		loadBuildVersion();
 		reloadAllGames();
 	</script>
 </body>

@@ -47,12 +47,14 @@ public class AdminService {
 		String gamePath = defaultProperties.getProperty(GAME_PATH);
 		File[] files = new File(gamePath).listFiles();
 
-		for (File file : files) {
-			if (file.isFile()) {
-				String fileName = file.getName().substring(0, file.getName().length() - 4);
-				String fileExtension = file.getName().substring(file.getName().length() - 3);
-				if ("jar".equalsIgnoreCase(fileExtension) && findJadFile(files, fileName)) {
-					allGames.add(file.getName().substring(0, file.getName().length() - 4));
+		if (files != null && files.length > 0) {
+			for (File file : files) {
+				if (file.isFile()) {
+					String fileName = file.getName().substring(0, file.getName().length() - 4);
+					String fileExtension = file.getName().substring(file.getName().length() - 3);
+					if ("jar".equalsIgnoreCase(fileExtension) && findJadFile(files, fileName)) {
+						allGames.add(file.getName().substring(0, file.getName().length() - 4));
+					}
 				}
 			}
 		}

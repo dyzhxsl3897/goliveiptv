@@ -44,4 +44,15 @@ public class ResourceController {
 		return response.build();
 	}
 
+	@GET
+	@Path("/image")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public Response getImage(@QueryParam("gamename") final String gameName, @QueryParam("imagename") final String imageName) {
+		String imagePath = defaultProperties.getProperty("image.path");
+		File fileDownload = new File(imagePath + File.separator + gameName + File.separator + imageName);
+		ResponseBuilder response = Response.ok((Object) fileDownload);
+		response.header("Content-Disposition", "attachment;filename=" + imageName);
+		return response.build();
+	}
+
 }

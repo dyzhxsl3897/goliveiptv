@@ -23,7 +23,7 @@
 			<param name="userid" value="053702181995_216">
 			<param name="apiurl" value="http://39.98.243.254:8080/lobby/rest">
 			<param name="imageurl" value="http://39.98.243.254:8080/lobby/rest/resources/image">
-			<param name="audiourl" value="audiourl">
+			<param name="audiourl" value="http://39.98.243.254:8080/lobby/rest/resources/audio">
 		</object>
 	</div>
 	<script type="text/javascript">

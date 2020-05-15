@@ -55,4 +55,15 @@ public class ResourceController {
 		return response.build();
 	}
 
+	@GET
+	@Path("/audio")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public Response getAudio(@QueryParam("gamename") final String gameName, @QueryParam("audioname") final String audioName) {
+		String audioPath = defaultProperties.getProperty("audio.path");
+		File fileDownload = new File(audioPath + File.separator + gameName + File.separator + audioName);
+		ResponseBuilder response = Response.ok((Object) fileDownload);
+		response.header("Content-Disposition", "attachment;filename=" + audioName);
+		return response.build();
+	}
+
 }

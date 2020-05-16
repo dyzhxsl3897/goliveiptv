@@ -48,7 +48,7 @@
 					<button class="ui-button ui-widget ui-corner-all" id="uploadFile">~开始上传</button>
 					<button class="ui-button ui-widget ui-corner-all" id="rechooseFile">+重新选择</button>
 				</div>
-				<div id="progress" style="background-color: #e1e2e4; height: 20px; width: 336px; border-style: solid; border-width: 1px; border-color: #cccccc;">
+				<div id="progress" style="margin-top: 10px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px; background-color: #e1e2e4; height: 20px; width: 336px; border-style: solid; border-width: 1px; border-color: #cccccc;">
 					<div class="bar" style="background-color: #4caf50;height: 20px; width: 0%;"></div>
 				</div>
 			</div>

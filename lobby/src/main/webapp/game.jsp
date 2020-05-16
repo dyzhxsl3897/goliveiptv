@@ -21,26 +21,9 @@
 			<param name="jad" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/rest/resources/jad/${param.gamename}.jad">
             <param name="jar" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/rest/resources/jad/${param.gamename}.jar">
 			<param name="userid" value="053702181995_216">
-			<param name="localAddr" value="${pageContext.request.localAddr}">
-			<param name="localName" value="${pageContext.request.localName}">
-			<param name="localPort" value="${pageContext.request.localPort}">
-			<param name="contextPath" value="${pageContext.request.contextPath}">
-			<param name="pathInfo" value="${pageContext.request.pathInfo}">
-			<param name="pathTranslated" value="${pageContext.request.pathTranslated}">
-			<param name="protocol" value="${pageContext.request.protocol}">
-			<param name="queryString" value="${pageContext.request.queryString}">
-			<param name="remoteAddr" value="${pageContext.request.remoteAddr}">
-			<param name="remoteHost" value="${pageContext.request.remoteHost}">
-			<param name="remotePort" value="${pageContext.request.remotePort}">
-			<param name="remoteUser" value="${pageContext.request.remoteUser}">
-			<param name="requestURI" value="${pageContext.request.requestURI}">
-			<param name="requestURL" value="${pageContext.request.requestURL}">
-			<param name="serverName" value="${pageContext.request.serverName}">
-			<param name="serverPort" value="${pageContext.request.serverPort}">
-			<param name="servletPath" value="${pageContext.request.servletPath}">
-			<param name="apiurl" value="http://39.98.243.254:8080/lobby/rest">
-			<param name="imageurl" value="http://39.98.243.254:8080/lobby/rest/resources/image">
-			<param name="audiourl" value="http://39.98.243.254:8080/lobby/rest/resources/audio">
+			<param name="apiurl" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/rest">
+			<param name="imageurl" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/rest/resources/image">
+			<param name="audiourl" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/rest/resources/audio">
 		</object>
 	</div>
 	<script type="text/javascript">

@@ -9,7 +9,7 @@
 	WebApplicationContext context = WebApplicationContextUtils
 			.getWebApplicationContext(this.getServletContext());
 	AdminService adminService = (AdminService) context.getBean("com.zhongdan.lobby.bl.services.AdminService");
-	List<String> games = adminService.getAllAvailableGames();
+	List<String> games = adminService.getAllGames();
 	JSONArray gamesJson = new JSONArray();
 	for (int i = 0; i < games.size(); i++) {
 		gamesJson.put(games.get(i));
@@ -74,7 +74,7 @@
 		            if(rawFile.status === 200 || rawFile.status == 0)
 		            {
 		                var buildversion = rawFile.responseText;
-		                var allText = "当前游戏大厅测试版本 (" + buildversion + ")";
+		                var allText = "当前游戏大厅测试版本 <br/>(" + buildversion + ")";
 		                document.getElementById("headerTxt").innerHTML = allText;
 		            }
 		        }

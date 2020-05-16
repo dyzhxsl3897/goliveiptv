@@ -43,13 +43,13 @@
 			</div>
 			<div class="jquery-fileupload">
 				<div class="">
-					<input id="uploadImg" type="file" name="uploadImg" multiple style="display: none" />
+					<input id="uploadGame" type="file" name="uploadGame" multiple style="display: none" />
 					<button class="ui-button ui-widget ui-corner-all" id="chooseFile">+选择文件</button>
 					<button class="ui-button ui-widget ui-corner-all" id="uploadFile">~开始上传</button>
 					<button class="ui-button ui-widget ui-corner-all" id="rechooseFile">+重新选择</button>
 				</div>
-				<div id="progress">
-					<div class="bar" style="width: 0%;"></div>
+				<div id="progress" style="background-color: #e1e2e4; height: 20px; width: 336px; border-style: solid; border-width: 1px; border-color: #cccccc;">
+					<div class="bar" style="background-color: #4caf50;height: 20px; width: 0%;"></div>
 				</div>
 			</div>
 		</div>
@@ -85,10 +85,10 @@
 	
 			$indexJs.initializeFileUploadWidget = function() {
 				$("#chooseFile").on("click", function() {
-					$("#uploadImg").click();
+					$("#uploadGame").click();
 				});
 	
-				$('#uploadImg').fileupload({
+				$('#uploadGame').fileupload({
 					url : $indexJs.getContextPath() + '/rest/admin/uploadgame',
 					Type : 'POST',
 					autoUpload : false,
@@ -120,7 +120,7 @@
 	
 					// 绑定点击重选事件
 					$("#rechooseFile").click(function() {
-						$("#uploadImg").click();
+						$("#uploadGame").click();
 						// 解绑，防止重复执行
 						$("#rechooseFile").off("click");
 					})
@@ -139,7 +139,6 @@
 				.on("fileuploadprogressall", function(e, data) {
 					$('#progress').show();
 					var progress = parseInt(data.loaded / data.total * 100, 10);
-					$('#progress').css('width', '15%');
 					$('#progress .bar').css('width', progress + '%');
 				})
 				// 上传请求失败时触发的回调函数
@@ -177,6 +176,7 @@
 	
 		$(document).ready(function() {
 			$indexJs.loadBuildVersion();
+			$('#progress').hide();
 			$indexJs.initializeFileUploadWidget();
 			$indexJs.reloadAllGames();
 		});

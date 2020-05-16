@@ -47,26 +47,12 @@ public class AdminController {
 		return status;
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getallavailablegames")
-	public Map<String, Object> getAllAvailableGames() {
-		Map<String, Object> status = new HashMap<>();
-		String returnStatus = STATUS_SUCCESS;
-
-		List<String> allGames = adminService.getAllAvailableGames();
-		status.put("allGames", allGames);
-
-		status.put(STATUS, returnStatus);
-		return status;
-	}
-
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/uploadgame")
-	public Map<String, Object> uploadGames(@FormDataParam("uploadImg") InputStream uploadedInputStream,
-			@FormDataParam("uploadImg") FormDataContentDisposition fileDetail) {
+	public Map<String, Object> uploadGames(@FormDataParam("uploadGame") InputStream uploadedInputStream,
+			@FormDataParam("uploadGame") FormDataContentDisposition fileDetail) {
 		Map<String, Object> status = new HashMap<>();
 		String returnStatus = STATUS_SUCCESS;
 

@@ -143,26 +143,22 @@
 				})
 				// 上传请求失败时触发的回调函数
 				.on("fileuploadfail", function(e, data) {
-					$("#upload_successfully_div").hide();
-					$("#upload_failed_div").show();
-					$indexJs.reloadAllGames();
-					$("#chooseFile").show();
-					$("#uploadFile").show();
-					$("#rechooseFile").show();
 				})
 				// 上传请求成功时触发的回调函数
 				.on("fileuploaddone", function(e, data) {
+				})
+				// 上传请求结束后，不管成功，错误或者中止都会被触发
+				.on("fileuploadalways", function(e, data) {
+				})
+				// 所有上传停止以后
+				.bind('fileuploadstop', function (e) {
 					$("#upload_failed_div").hide();
 					$("#upload_successfully_div").show();
 					$indexJs.reloadAllGames();
 					$("#chooseFile").show();
 					$("#uploadFile").show();
 					$("#rechooseFile").show();
-				})
-				// 上传请求结束后，不管成功，错误或者中止都会被触发
-				.on("fileuploadalways", function(e, data) {
-	
-				})
+				});
 			}
 	
 			$indexJs.loadBuildVersion = function() {

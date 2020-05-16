@@ -109,6 +109,8 @@
 					$("#chooseFile").hide();
 					$("#uploadFile").show();
 					$("#rechooseFile").show();
+					$("#upload_failed_div").hide();
+					$("#upload_successfully_div").hide();
 	
 					// 绑定开始上传事件
 					$('#uploadFile').click(function() {

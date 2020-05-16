@@ -18,8 +18,8 @@
 	</div>
 	<div style="z-index: 99">
 		<object id="j2me-object" classid="ipanel:j2me-midp2" width="644" height="534">
-			<param name="jad" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/${pageContext.request.contextPath}/rest/resources/jad/${param.gamename}.jad">
-            <param name="jar" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/${pageContext.request.contextPath}/rest/resources/jad/${param.gamename}.jar">
+			<param name="jad" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/rest/resources/jad/${param.gamename}.jad">
+            <param name="jar" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/rest/resources/jad/${param.gamename}.jar">
 			<param name="userid" value="053702181995_216">
 			<param name="localAddr" value="${pageContext.request.localAddr}">
 			<param name="localName" value="${pageContext.request.localName}">

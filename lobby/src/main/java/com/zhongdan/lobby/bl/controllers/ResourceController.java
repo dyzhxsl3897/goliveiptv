@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -23,24 +24,24 @@ public class ResourceController {
 	private DefaultProperties defaultProperties;
 
 	@GET
-	@Path("/jad")
+	@Path("/jad/{gamename}")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public Response getJad(@QueryParam("gamename") final String jadName) {
+	public Response getJad(@PathParam("gamename") final String jadName) {
 		String gamePath = defaultProperties.getProperty("game.path");
-		File fileDownload = new File(gamePath + File.separator + jadName + ".jad");
+		File fileDownload = new File(gamePath + File.separator + jadName);
 		ResponseBuilder response = Response.ok((Object) fileDownload);
-		response.header("Content-Disposition", "attachment;filename=" + jadName + ".jad");
+		response.header("Content-Disposition", "attachment;filename=" + jadName);
 		return response.build();
 	}
 
 	@GET
-	@Path("/jar")
+	@Path("/jar/{gamename}")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public Response getJar(@QueryParam("gamename") final String jarName) {
+	public Response getJar(@PathParam("gamename") final String jarName) {
 		String gamePath = defaultProperties.getProperty("game.path");
-		File fileDownload = new File(gamePath + File.separator + jarName + ".jar");
+		File fileDownload = new File(gamePath + File.separator + jarName);
 		ResponseBuilder response = Response.ok((Object) fileDownload);
-		response.header("Content-Disposition", "attachment;filename=" + jarName + ".jar");
+		response.header("Content-Disposition", "attachment;filename=" + jarName);
 		return response.build();
 	}
 

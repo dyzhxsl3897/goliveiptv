@@ -7,6 +7,7 @@
 <meta http-equiv="Pragma" CONTENT="no-cache">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.png" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/w3.css">
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jqueryui/jquery-ui-1.12.1.custom/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jqueryui/jquery-ui-1.12.1.custom/jquery-ui.theme.min.css">
@@ -24,23 +25,23 @@
 <title>Good IPTV Games</title>
 </head>
 <body>
-	<h3 id="headerTxt"></h3>
+	<h4 id="headerTxt"></h4>
 	<div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/index/iptv.png">
 	</div>
-	<div style="position: fixed; left: 60px;">
+	<div style="position: fixed; left: 20px;">
 		<div>
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/index/font_already_uploaded.png">
 		</div>
-		<div style="position: fixed; top: 40px; left: 450px;">
+		<div style="position: fixed; top: 40px; left: 550px;">
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/index/font_help.png">
 		</div>
 		<div>
-			<button class="ui-button ui-widget ui-corner-all" id="refreshAllGamesBtn" onclick="$indexJs.reloadAllGames();">刷新游戏列表</button>
-			<div class="menu">
-				<ul id="menu">
-				</ul>
+			<div>
+				<button class="ui-button ui-widget ui-corner-all" id="refreshAllGamesBtn" onclick="$indexJs.reloadAllGames();">刷新游戏列表</button>
 			</div>
+			<iframe id="show_game_iframe" name="show_game_iframe" src="${pageContext.request.contextPath}/show_game.jsp" width="520px" height="500">
+			</iframe>
 			<div class="jquery-fileupload">
 				<div class="">
 					<input id="uploadGame" type="file" name="uploadGame" multiple style="display: none" />
@@ -72,15 +73,20 @@
 			}
 	
 			$indexJs.reloadAllGames = function() {
-				$("#menu").html("");
+				
+				/*
+				var menu = $("#show_game_iframe").contents().find("#menu");
+				$(menu).html("");
 	
 				$.get($indexJs.getContextPath() + "/rest/admin/getallgames", function(data) {
 					var allGames = data.allGames;
-					var i;
 					for (i = 0; i < allGames.length; i++) {
-						$("#menu").append("<li><div>" + allGames[i] + "</div></li>");
+						var gameElement = document.createElement("p");
+						$(gameElement).html(allGames[i]);
+						$(menu).append(gameElement);
 					}
 				});
+				*/
 			}
 	
 			$indexJs.initializeFileUploadWidget = function() {
@@ -176,7 +182,6 @@
 			$indexJs.loadBuildVersion();
 			$('#progress').hide();
 			$indexJs.initializeFileUploadWidget();
-			$indexJs.reloadAllGames();
 		});
 	</script>
 </body>

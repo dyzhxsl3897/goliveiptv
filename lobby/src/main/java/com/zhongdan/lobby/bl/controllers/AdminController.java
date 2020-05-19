@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -42,6 +43,20 @@ public class AdminController {
 
 		List<String> allGames = adminService.getAllGames();
 		status.put("allGames", allGames);
+
+		status.put(STATUS, returnStatus);
+		return status;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getgameresources/{gamename}")
+	public Map<String, Object> getAllGameResrouces(@PathParam("gamename") final String gameName) {
+		Map<String, Object> status = new HashMap<>();
+		String returnStatus = STATUS_SUCCESS;
+
+		List<String> allGameResrouces = adminService.getAllGameResrouces(gameName);
+		status.put("allResources", allGameResrouces);
 
 		status.put(STATUS, returnStatus);
 		return status;

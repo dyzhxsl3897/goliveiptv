@@ -22,6 +22,8 @@ import com.zhongdan.lobby.bl.utils.DefaultProperties;
 public class AdminService {
 
 	private static final String GAME_PATH = "game.path";
+	private static final String IMAGE_PATH = "image.path";
+	private static final String AUDIO_PATH = "audio.path";
 
 	@Autowired
 	private DefaultProperties defaultProperties;
@@ -55,6 +57,28 @@ public class AdminService {
 		}
 
 		return allGames;
+	}
+
+	public List<String> getAllGameResrouces(String gameName) {
+		List<String> allGameResrouces = new ArrayList<>();
+
+		String imagePath = defaultProperties.getProperty(IMAGE_PATH);
+		File[] imageFiles = new File(imagePath + File.separator + gameName).listFiles();
+		String audioPath = defaultProperties.getProperty(AUDIO_PATH);
+		File[] audioFiles = new File(audioPath + File.separator + gameName).listFiles();
+
+		if (imageFiles != null) {
+			for (File imageFile : imageFiles) {
+				allGameResrouces.add(imageFile.getName());
+			}
+		}
+		if (audioFiles != null) {
+			for (File audioFile : audioFiles) {
+				allGameResrouces.add(audioFile.getName());
+			}
+		}
+
+		return allGameResrouces;
 	}
 
 	public void uploadGames(InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {

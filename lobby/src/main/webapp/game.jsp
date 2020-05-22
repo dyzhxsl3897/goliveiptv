@@ -29,7 +29,7 @@
 	<script type="text/javascript">
 		// 返回
 		function back() {
-			window.location.href = "http://39.98.243.254:8080/lobby/game_home.jsp";
+			window.location.href = "http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/game_home.jsp";
 		}
 		window.JVM_EVENT = {
 			DOWNLOAD_START : 0,

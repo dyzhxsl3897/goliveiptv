@@ -12,14 +12,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.FileUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zhongdan.lobby.bl.utils.DefaultProperties;
 
-@Service("com.zhongdan.lobby.bl.services.AdminService")
-public class AdminService {
+@Service("com.zhongdan.lobby.bl.services.ResourceService")
+public class ResourceService {
 
 	private static final String GAME_PATH = "game.path";
 	private static final String IMAGE_PATH = "image.path";
@@ -90,7 +91,35 @@ public class AdminService {
 		writeToFile(uploadedInputStream, uploadedFileLocation);
 	}
 
+	public void uploadResource(String gameName, InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {
+		String fileName = fileDetail.getFileName();
+		if (fileName.endsWith(".wav")) {
+			uploadAudioFile(gameName, uploadedInputStream, fileDetail);
+		} else if (fileName.endsWith(".jpg") || fileName.endsWith(".png")) {
+			uploadImageFile(gameName, uploadedInputStream, fileDetail);
+		}
+	}
+
+	private void uploadImageFile(String gameName, InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {
+		String fileName = fileDetail.getFileName();
+		String gamePath = defaultProperties.getProperty(IMAGE_PATH) + "/" + gameName;
+		Files.deleteIfExists(Paths.get(gamePath + "/" + fileName));
+
+		String uploadedFileLocation = gamePath + "/" + fileName;
+		writeToFile(uploadedInputStream, uploadedFileLocation);
+	}
+
+	private void uploadAudioFile(String gameName, InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {
+		String fileName = fileDetail.getFileName();
+		String gamePath = defaultProperties.getProperty(AUDIO_PATH) + "/" + gameName;
+		Files.deleteIfExists(Paths.get(gamePath + "/" + fileName));
+
+		String uploadedFileLocation = gamePath + "/" + fileName;
+		writeToFile(uploadedInputStream, uploadedFileLocation);
+	}
+
 	private void writeToFile(InputStream uploadedInputStream, String uploadedFileLocation) throws IOException {
+		FileUtils.forceMkdirParent(new File(uploadedFileLocation));
 		int read = 0;
 		byte[] bytes = new byte[1024];
 

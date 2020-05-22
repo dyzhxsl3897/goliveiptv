@@ -1,15 +1,15 @@
-<%@page import="org.json.JSONArray"%>
-<%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="java.util.List"%>
-<%@page import="com.zhongdan.lobby.bl.services.AdminService"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="com.zhongdan.lobby.bl.services.ResourceService"%>
+<%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page isELIgnored="false"%>
 <%@ pagecontentType="text/html;charset=UTF-8" %>
 <%
 	WebApplicationContext context = WebApplicationContextUtils
 			.getWebApplicationContext(this.getServletContext());
-	AdminService adminService = (AdminService) context.getBean("com.zhongdan.lobby.bl.services.AdminService");
-	List<String> games = adminService.getAllGames();
+	ResourceService resourceService = (ResourceService) context.getBean("com.zhongdan.lobby.bl.services.ResourceService");
+	List<String> games = resourceService.getAllGames();
 	JSONArray gamesJson = new JSONArray();
 	for (int i = 0; i < games.size(); i++) {
 		gamesJson.put(games.get(i));

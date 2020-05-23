@@ -122,6 +122,18 @@ public class ResourceController {
 		return Response.ok().build();
 	}
 
+	@GET
+	@Path("/deletegame/{gameName}")
+	public Response deleteGame(@PathParam("gameName") String gameName) {
+		try {
+			resourceService.deleteGame(gameName);
+		} catch (IOException e) {
+			log.error("", e);
+			return Response.serverError().build();
+		}
+		return Response.ok().build();
+	}
+
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Path("/uploadresource/{gameName}")
@@ -134,6 +146,19 @@ public class ResourceController {
 			return Response.serverError().build();
 		}
 
+		return Response.ok().build();
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/deleteresource/{gameName}")
+	public Response deleteResource(@PathParam("gameName") String gameName, String[] resources) {
+		try {
+			resourceService.deleteResource(gameName, resources);
+		} catch (IOException e) {
+			log.error("", e);
+			return Response.serverError().build();
+		}
 		return Response.ok().build();
 	}
 

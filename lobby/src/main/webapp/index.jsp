@@ -68,12 +68,14 @@
 				<button class="myButton w3-small" id="chooseFile">选择jar和jad文件</button>
 				<button class="myButton w3-small" id="uploadFile">开始上传</button>
 				<button class="myButton w3-small" id="rechooseFile">重新选择</button>
+				<button class="myButton w3-small" id="deleteGame" onclick="$indexJs.deleteGame();">删除选中游戏</button>
 			</div>
 			<div class="jquery-fileupload">
 				<input id="uploadResource" type="file" name="uploadResource" multiple style="display: none" />
-				<button class="myButton w3-small" id="chooseResourceFile">选择图片或音频文件</button>
+				<button class="myButton w3-small" id="chooseResourceFile">选择素材文件</button>
 				<button class="myButton w3-small" id="uploadResourceFile">开始上传</button>
 				<button class="myButton w3-small" id="rechooseResourceFile">重新选择</button>
+				<button class="myButton w3-small" id="deleteGame" onclick="$indexJs.deleteResource();">删除选中游戏素材</button>
 			</div>
 			<iframe id="show_game_iframe" name="show_game_iframe" src="${pageContext.request.contextPath}/show_game.jsp" width="520px" height="500">
 			</iframe>
@@ -101,6 +103,34 @@
 	
 			$indexJs.reloadAllGames = function() {
 				$("#show_game_iframe")[0].contentWindow.$showGameJs.reloadAllGames();
+			};
+
+			$indexJs.deleteGame = function() {
+				var selectedGame = $("#show_game_iframe").contents().find("#game p a.selected").attr("gameName");
+				if (selectedGame != undefined) {
+					$.get($indexJs.getContextPath() + "/rest/resources/deletegame/" + selectedGame, function () {
+						$indexJs.reloadAllGames();
+					});
+				}
+			};
+
+			$indexJs.deleteResource = function() {
+				var selectedResources = [];
+				var selectedCheckboxes = $("#show_game_iframe").contents().find("#res p input:checked").each(function() {
+					selectedResources.push($(this).val());
+				});
+				var selectedGame = $("#show_game_iframe").contents().find("#game p a.selected").attr("gameName");
+				if (selectedGame != undefined && selectedResources.length > 0) {
+					$.ajax({
+						type: "POST",
+						url: $indexJs.getContextPath() + "/rest/resources/deleteresource/" + selectedGame,
+						data: JSON.stringify(selectedResources),
+						contentType: "application/json; charset=utf-8",
+						success: function (data) {
+							$indexJs.reloadAllGames();
+						}
+					});
+				}
 			};
 	
 			$indexJs.initializeGameUploadWidget = function() {
@@ -194,7 +224,6 @@
 				});
 	
 				$('#uploadResource').fileupload({
-					url : $indexJs.buildUploadResourceUrl(),
 					Type : 'POST',
 					autoUpload : false,
 					acceptFileTypes : /(jpg|png|wav)$/i,
@@ -209,30 +238,33 @@
 				})// 图片添加完成后触发的事件
 				.on("fileuploadadd", function(e, data) {
 					// 根据选中的游戏名字改变URL
-					data.url = $indexJs.buildUploadResourceUrl();
-					// 隐藏或显示页面元素
-					$('#progress .bar').css('width', '0%');
-					$('#progress').hide();
-					$("#chooseResourceFile").hide();
-					$("#uploadResourceFile").show();
-					$("#rechooseResourceFile").show();
-					$("#upload_failed_div").hide();
-					$("#upload_successfully_div").hide();
-	
-					// 绑定开始上传事件
-					$('#uploadResourceFile').click(function() {
-						$("#uploadResourceFile").hide();
-						data.submit();
-						// 解绑，防止重复执行
-						$("#uploadResourceFile").off("click");
-					})
-	
-					// 绑定点击重选事件
-					$("#rechooseResourceFile").click(function() {
-						$("#uploadResource").click();
-						// 解绑，防止重复执行
-						$("#rechooseResourceFile").off("click");
-					})
+					var gameName = $("#show_game_iframe").contents().find("#game p a.selected").attr("gameName");
+					if (gameName != undefined) {
+						data.url = $indexJs.getContextPath() + '/rest/resources/uploadresource/' + gameName;
+						// 隐藏或显示页面元素
+						$('#progress .bar').css('width', '0%');
+						$('#progress').hide();
+						$("#chooseResourceFile").hide();
+						$("#uploadResourceFile").show();
+						$("#rechooseResourceFile").show();
+						$("#upload_failed_div").hide();
+						$("#upload_successfully_div").hide();
+		
+						// 绑定开始上传事件
+						$('#uploadResourceFile').click(function() {
+							$("#uploadResourceFile").hide();
+							data.submit();
+							// 解绑，防止重复执行
+							$("#uploadResourceFile").off("click");
+						})
+		
+						// 绑定点击重选事件
+						$("#rechooseResourceFile").click(function() {
+							$("#uploadResource").click();
+							// 解绑，防止重复执行
+							$("#rechooseResourceFile").off("click");
+						})
+					}
 				})
 				// 当一个单独的文件处理队列结束触发(验证文件格式和大小)
 				.on("fileuploadprocessalways", function(e, data) {

@@ -91,6 +91,30 @@ public class ResourceService {
 		writeToFile(uploadedInputStream, uploadedFileLocation);
 	}
 
+	public void deleteGame(String gameName) throws IOException {
+		String gamePath = defaultProperties.getProperty(GAME_PATH);
+		Files.deleteIfExists(Paths.get(gamePath + "/" + gameName + ".jad"));
+		Files.deleteIfExists(Paths.get(gamePath + "/" + gameName + ".jar"));
+
+		String imagePath = defaultProperties.getProperty(IMAGE_PATH);
+		File[] imageFiles = new File(imagePath + File.separator + gameName).listFiles();
+		String audioPath = defaultProperties.getProperty(AUDIO_PATH);
+		File[] audioFiles = new File(audioPath + File.separator + gameName).listFiles();
+
+		if (imageFiles != null) {
+			for (File imageFile : imageFiles) {
+				Files.deleteIfExists(imageFile.toPath());
+			}
+			Files.deleteIfExists(Paths.get(imagePath + File.separator + gameName));
+		}
+		if (audioFiles != null) {
+			for (File audioFile : audioFiles) {
+				Files.deleteIfExists(audioFile.toPath());
+			}
+			Files.deleteIfExists(Paths.get(audioPath + File.separator + gameName));
+		}
+	}
+
 	public void uploadResource(String gameName, InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {
 		String fileName = fileDetail.getFileName();
 		if (fileName.endsWith(".wav")) {
@@ -102,20 +126,32 @@ public class ResourceService {
 
 	private void uploadImageFile(String gameName, InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {
 		String fileName = fileDetail.getFileName();
-		String gamePath = defaultProperties.getProperty(IMAGE_PATH) + "/" + gameName;
-		Files.deleteIfExists(Paths.get(gamePath + "/" + fileName));
+		String imagePath = defaultProperties.getProperty(IMAGE_PATH) + "/" + gameName;
+		Files.deleteIfExists(Paths.get(imagePath + "/" + fileName));
 
-		String uploadedFileLocation = gamePath + "/" + fileName;
+		String uploadedFileLocation = imagePath + "/" + fileName;
 		writeToFile(uploadedInputStream, uploadedFileLocation);
 	}
 
 	private void uploadAudioFile(String gameName, InputStream uploadedInputStream, FormDataContentDisposition fileDetail) throws IOException {
 		String fileName = fileDetail.getFileName();
-		String gamePath = defaultProperties.getProperty(AUDIO_PATH) + "/" + gameName;
-		Files.deleteIfExists(Paths.get(gamePath + "/" + fileName));
+		String audioPath = defaultProperties.getProperty(AUDIO_PATH) + "/" + gameName;
+		Files.deleteIfExists(Paths.get(audioPath + "/" + fileName));
 
-		String uploadedFileLocation = gamePath + "/" + fileName;
+		String uploadedFileLocation = audioPath + "/" + fileName;
 		writeToFile(uploadedInputStream, uploadedFileLocation);
+	}
+
+	public void deleteResource(String gameName, String[] resources) throws IOException {
+		String imagePath = defaultProperties.getProperty(IMAGE_PATH) + "/" + gameName;
+		String audioPath = defaultProperties.getProperty(AUDIO_PATH) + "/" + gameName;
+		for (String res : resources) {
+			if (res.endsWith(".jpg") || res.endsWith("png")) {
+				Files.deleteIfExists(Paths.get(imagePath + "/" + res));
+			} else if (res.endsWith(".wav")) {
+				Files.deleteIfExists(Paths.get(audioPath + "/" + res));
+			}
+		}
 	}
 
 	private void writeToFile(InputStream uploadedInputStream, String uploadedFileLocation) throws IOException {

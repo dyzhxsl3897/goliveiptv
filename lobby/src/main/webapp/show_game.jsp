@@ -56,10 +56,22 @@
 				var allRes = data;
 				for (i = 0; i < allRes.length; i++) {
 					var resParagraph = document.createElement("p");
+
 					var checkBox = document.createElement("input");
-					$(resParagraph).append();
+					$(checkBox).addClass("w3-check");
+					$(checkBox).attr({
+						id: "check_" + allRes[i],
+						name: "check_" + allRes[i],
+						value: allRes[i],
+						type: "checkbox",
+						checked: false
+					});
+					$(resParagraph).append(checkBox);
+
 					var label = document.createElement("label");
-					$(resParagraph).html(allRes[i]);
+					$(label).html(allRes[i]);
+					$(resParagraph).append(label);
+					
 					$(res).append(resParagraph);
 				}
 			});
@@ -80,8 +92,13 @@
 					$(gameLink).html(allGames[i]);
 					$(gameLink).attr('href', "#");
 					$(gameLink).attr('gameName', allGames[i]);
-					$(gameLink).removeClass("selected");
-					$(gameLink).addClass("unselected");
+					if (i == 0) {
+						$(gameLink).removeClass("unselected");
+						$(gameLink).addClass("selected");
+					} else {
+						$(gameLink).removeClass("selected");
+						$(gameLink).addClass("unselected");
+					}
 					$(gameLink).click(function() {
 						$showGameJs.getResource($(this).attr("gameName"));
 						$("#game p a.selected").removeClass("selected");
@@ -91,6 +108,8 @@
 					});
 					$(game).append(gameParagraph);
 				}
+				var gameName = $("#game p a.selected").attr("gameName");
+				$showGameJs.getResource(gameName);
 			});
 		}
 
